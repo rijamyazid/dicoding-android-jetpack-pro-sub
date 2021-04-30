@@ -209,6 +209,6 @@ object DataDummy {
             "https://asianwiki.com/images/e/e4/Let%27s_Fight_Ghost-p1.jpg"
         ))
 
-        return ArrayList()
+        return listTvshow
     }
 }

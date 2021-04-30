@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.jetpack_submissions.data.MovieEntity
 import com.example.jetpack_submissions.databinding.ItemsMoviesBinding
 
-class MoviesAdapter: RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+class MoviesAdapter(private val listener: MoviesListener): RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
     private var listMovie = ArrayList<MovieEntity>()
 
@@ -26,9 +26,17 @@ class MoviesAdapter: RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
                 Glide.with(itemView.context)
                     .load(movie.imgPath)
                     .into(imgPoster)
+
+                itemView.setOnClickListener {
+                    listener.moviesOnClick(movie)
+                }
             }
         }
 
+    }
+
+    interface MoviesListener{
+        fun moviesOnClick(movie: MovieEntity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
