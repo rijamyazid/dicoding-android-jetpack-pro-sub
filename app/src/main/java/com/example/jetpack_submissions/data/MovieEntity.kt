@@ -11,5 +11,6 @@ data class MovieEntity(
     var country: String,
     var releaseYear: String,
     var desc: String,
-    var imgPath: String
+    var genre: List<String>,
+    var imgPath: Int
 ):Parcelable
