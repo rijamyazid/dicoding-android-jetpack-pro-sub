@@ -12,11 +12,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Bind view
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
 
     }
 

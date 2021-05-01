@@ -38,7 +38,7 @@ class TvshowsFragment : Fragment(), MovieListener {
 
             val tvShowsAdapter = TvshowsAdapter(context, this)
             tvShowsAdapter.setTvshows(tvShows)
-            with(binding.rvMovies) {
+            with(binding.rvTvshows) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = tvShowsAdapter
