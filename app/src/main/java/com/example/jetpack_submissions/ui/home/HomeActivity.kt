@@ -16,11 +16,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Memasang ViewPager di Activity
-        val homePagerAdapter = HomePagerAdapter(this, supportFragmentManager)
-        binding.viewPager.adapter = homePagerAdapter
-        binding.tabs.setupWithViewPager(binding.viewPager)
-        supportActionBar?.elevation = 0f
+
 
     }
 
