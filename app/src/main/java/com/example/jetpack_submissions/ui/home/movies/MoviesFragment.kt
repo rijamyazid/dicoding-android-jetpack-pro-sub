@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.data.MovieEntity
 import com.example.jetpack_submissions.databinding.FragmentMoviesBinding
 import com.example.jetpack_submissions.ui.detail.DetailActivity
+import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
 import com.example.jetpack_submissions.ui.home.MovieListener
 
 class MoviesFragment : Fragment(), MovieListener {
@@ -42,8 +44,7 @@ class MoviesFragment : Fragment(), MovieListener {
     }
 
     override fun movieOnClick(entity: MovieEntity) {
-        val intent = Intent(context, DetailActivity::class.java)
-        intent.putExtra("Movie", entity)
-        startActivity(intent)
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailActivity(entity)
+        findNavController().navigate(action)
     }
 }

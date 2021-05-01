@@ -20,5 +20,18 @@
         android:id="@+id/homeFragment"
         android:name="com.example.jetpack_submissions.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_detailActivity"
+            app:destination="@id/detailActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/detailActivity"
+        android:name="com.example.jetpack_submissions.ui.detail.DetailActivity"
+        android:label="activity_detail"
+        tools:layout="@layout/activity_detail" >
+        <argument
+            android:name="movie"
+            app:argType="com.example.jetpack_submissions.data.MovieEntity" />
+    </activity>
 </navigation>
