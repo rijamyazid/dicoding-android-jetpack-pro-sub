@@ -30,7 +30,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.MoviesListener {
             viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[MoviesViewModel::class.java]
             val movies = viewModel.getDataMovies()
 
-            val moviesAdapter = MoviesAdapter(this)
+            val moviesAdapter = MoviesAdapter(context, this)
             moviesAdapter.setMovies(movies)
             with(binding.rvMovies){
                 layoutManager = LinearLayoutManager(context)

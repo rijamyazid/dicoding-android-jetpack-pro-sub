@@ -1,13 +1,15 @@
 package com.example.jetpack_submissions.ui.home.movies
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.data.MovieEntity
 import com.example.jetpack_submissions.databinding.ItemsMoviesBinding
 
-class MoviesAdapter(private val listener: MoviesListener): RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+class MoviesAdapter(private val context: Context?, private val listener: MoviesListener): RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
     private var listMovie = ArrayList<MovieEntity>()
 
@@ -21,7 +23,7 @@ class MoviesAdapter(private val listener: MoviesListener): RecyclerView.Adapter<
 
         fun bind(movie: MovieEntity){
             with(binding){
-                tvItemTitle.text = movie.title
+                tvItemTitle.text = context?.getString(R.string.titleAndRelease, movie.title, movie.releaseYear)
                 tvItemDesc.text = movie.desc
                 Glide.with(itemView.context)
                     .load(movie.imgPath)
