@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class MovieEntity(
-    var movieId: String,
+    var Id: String,
     var title: String,
     var director: String,
     var country: String,

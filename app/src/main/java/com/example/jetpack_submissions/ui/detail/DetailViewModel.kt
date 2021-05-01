@@ -2,7 +2,6 @@ package com.example.jetpack_submissions.ui.detail
 
 import androidx.lifecycle.ViewModel
 import com.example.jetpack_submissions.data.MovieEntity
-import com.example.jetpack_submissions.data.TvshowEntity
 
 class DetailViewModel: ViewModel() {
 

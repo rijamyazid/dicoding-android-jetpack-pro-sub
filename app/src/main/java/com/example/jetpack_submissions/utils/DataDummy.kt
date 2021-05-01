@@ -2,7 +2,6 @@ package com.example.jetpack_submissions.utils
 
 import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.data.MovieEntity
-import com.example.jetpack_submissions.data.TvshowEntity
 
 object DataDummy {
 
@@ -124,100 +123,110 @@ object DataDummy {
         return listMovie
     }
 
-    fun generateDummyTvshows(): ArrayList<TvshowEntity> {
+    fun generateDummyTvshows(): ArrayList<MovieEntity> {
 
-        val listTvshow = ArrayList<TvshowEntity>()
+        val listTvshow = ArrayList<MovieEntity>()
 
         listTvshow.add(
-            TvshowEntity(
+            MovieEntity(
             "t1",
-            "7 (Seven)",
-            "Nizar Shafi",
-            "India",
-            "2019",
-            "Multiple women report their husbands as missing but when it appears they are looking for the same man, a police officer traces their cryptic connection.",
-            "https://upload.wikimedia.org/wikipedia/en/b/bb/Seven_Tv_Drama.png"
-        ))
-        listTvshow.add(TvshowEntity(
-            "t2",
-            "A Lion in the House",
-            "Steven Bognar, Julia Reichert",
-            "United States",
-            "2006",
-            "Five kids and their resilient families navigate the treatments and traumas of pediatric cancer in this documentary filmed over the course of six years.",
-            "https://upload.wikimedia.org/wikipedia/en/2/29/A_Lion_in_the_House_-_cover_art.jpg"
-        ))
-        listTvshow.add(TvshowEntity(
-            "t3",
-            "13 Reasons Why",
-            "Joseph Incaprera",
-            "United States",
-            "2020",
-            "After a teenage girl's perplexing suicide, a classmate receives a series of tapes that unravel the mystery of her tragic choice.",
-            "https://m.media-amazon.com/images/P/0451478290.01._SCLZZZZZZZ_SX500_.jpg"
-        ))
-        listTvshow.add(TvshowEntity(
-            "t4",
-            "A Young Doctor's Notebook and Other Stories",
-            "Daniel Radcliffe",
-            "United Kingdom",
-            "2013",
-            "Set during the Russian Revolution, this comic miniseries is based on a doctor's memories of his early career working in an out-of-the-way village.",
-            "https://upload.wikimedia.org/wikipedia/en/9/95/Young-Doctors-Notebook-DVD.jpg"
-        ))
-        listTvshow.add(TvshowEntity(
-            "t5",
-            "A.I.C.O.",
-            "Kazuya Murata",
+            "Dragon Ball",
+            "Akira Toriyama",
             "Japan",
-            "2018",
-            "Everything Aiko knew was a lie. Now she's joining a team of Divers to reach the place where the Burst began to stop it for good and save her family.",
-            "https://upload.wikimedia.org/wikipedia/en/9/92/A.I.C.O._-Incarnation-_poster.jpg"
+            "1986",
+            "Long ago in the mountains, a fighting master known as Gohan discovered a strange boy whom he named Goku. Gohan raised him and trained Goku in martial arts until he died. The young and very strong boy was on his own, but easily managed. Then one day, Goku met a teenage girl named Bulma, whose search for the mystical Dragon Balls brought her to Goku's home. Together, they set off to find all seven and to grant her wish",
+                    listOf("Animation", "Action", "Adventure", "Sci-Fi", "Fantasy"),
+                    R.drawable.tv_poster_dragon_ball
         ))
-        listTvshow.add(TvshowEntity(
-            "t6",
-            "Abby Hatcher",
-            "Kyran Kelly",
+        listTvshow.add(MovieEntity(
+            "t2",
+            "Fairy Tail",
+            "Hiro Mashima",
+            "Japan",
+            "2009",
+            "Lucy is a 17-year-old girl, who wants to be a full-fledged mage. One day when visiting Harujion Town, she meets Natsu, a young man who gets sick easily by any type of transportation. But Natsu isn't just any ordinary kid, he's a member of one of the world's most infamous mage guilds: Fairy Tail.",
+                listOf("Action", "Adventure", "Animation", "Comedy", "Sci-Fi", "Fantasy", "Mystery"),
+                R.drawable.tv_poster_fairytail
+        ))
+        listTvshow.add(MovieEntity(
+            "t3",
+            "Family Guy",
+            "Seth MacFarlane",
+            "United States",
+            "1999",
+            "Sick, twisted, politically incorrect and Freakin' Sweet animated series featuring the adventures of the dysfunctional Griffin family. Bumbling Peter and long-suffering Lois have three kids. Stewie (a brilliant but sadistic baby bent on killing his mother and taking over the world), Meg (the oldest, and is the most unpopular girl in town) and Chris (the middle kid, he's not very bright but has a passion for movies). The final member of the family is Brian - a talking dog and much more than a pet, he keeps Stewie in check whilst sipping Martinis and sorting through his own life issues.",
+                listOf("Animation", "Comedy"),
+                R.drawable.tv_poster_family_guy
+        ))
+        listTvshow.add(MovieEntity(
+            "t4",
+            "The Flash",
+            "Greg Berlanti",
+            "United States",
+            "2014",
+            "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \"meta-human\" who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash.",
+                listOf("Drama", "Sci-Fi","Fantasy"),
+                R.drawable.tv_poster_flash
+        ))
+        listTvshow.add(MovieEntity(
+            "t5",
+            "Hanna",
+            "David Farr",
             "United States",
             "2019",
-            "A big-hearted girl helps her Fuzzly friends who live in her family's hotel with exploring feelings, fixing mishaps and embracing their special quirks.",
-            "https://upload.wikimedia.org/wikipedia/en/e/e0/Abby_Hatcher_logo.png"
+            "This thriller and coming-of-age drama follows the journey of an extraordinary young girl as she evades the relentless pursuit of an off-book CIA agent and tries to unearth the truth behind who she is. Based on the 2011 Joe Wright film.",
+                listOf("Action", "Adventure", "Drama"),
+                R.drawable.tv_poster_hanna
         ))
-        listTvshow.add(TvshowEntity(
+        listTvshow.add(MovieEntity(
+            "t6",
+            "Naruto Shipudden",
+            "Masashi Kishimoto",
+            "Japan",
+            "2007",
+            "Naruto Shippuuden is the continuation of the original animated TV series Naruto.The story revolves around an older and slightly more matured Uzumaki Naruto and his quest to save his friend Uchiha Sasuke from the grips of the snake-like Shinobi, Orochimaru. After 2 and a half years Naruto finally returns to his village of Konoha, and sets about putting his ambitions to work, though it will not be easy, as He has amassed a few (more dangerous) enemies, in the likes of the shinobi organization; Akatsuki.",
+                listOf("Animation", "Action", "Adventure", "Sci-Fi", "Fantasy"),
+                R.drawable.tv_poster_naruto_shipudden
+        ))
+        listTvshow.add(MovieEntity(
             "t7",
-            "Absurd Planet",
-            "Juliana Vicente",
+            "NCIS",
+            "Donald P. Bellisario",
             "United States",
-            "2020",
-            "A cast of quirky critters and Mother Nature herself narrate this funny science series, which peeks into the lives of Earth's most incredible animals.",
-            "https://static.next-episode.net/tv-shows-images/huge/absurd-planet.jpg"
+            "2003",
+            "From murder and espionage to terrorism and stolen submarines, a team of special agents investigates any crime that has a shred of evidence connected to Navy and Marine Corps personnel, regardless of rank or position.",
+                listOf("Crime", "Action", "Adventure", "Drama"),
+                R.drawable.tv_poster_ncis
         ))
-        listTvshow.add(TvshowEntity(
+        listTvshow.add(MovieEntity(
             "t8",
-            "Age of Rebellion",
-            "Peter Ho",
-            "Taiwan",
-            "2018",
-            "At their high school, a group of unruly teens wreak havoc, face bullies and navigate turbulent lives beyond school grounds.",
-            "https://i.mydramalist.com/8pq2df.jpg"
-        ))
-        listTvshow.add(TvshowEntity(
-            "t9",
-            "American Experience: The Circus",
-            "Sharon Grimberg",
+            "Riverdale",
+            "Roberto Aguirre-Sacasa",
             "United States",
-            "2018",
-            "An exploration of the American circus, as the spectacle evolved from a one-ring show to a cultural event and eventually, a dying breed.",
-            "https://images-na.ssl-images-amazon.com/images/I/81THLiNlSWL._SX268_.jpg"
+            "2017",
+            "Set in the present, the series offers a bold, subversive take on Archie, Betty, Veronica and their friends, exploring the surreality of small-town life, the darkness and weirdness bubbling beneath Riverdale’s wholesome facade.",
+                listOf("Mystery", "Drama", "Crime"),
+                R.drawable.tv_poster_riverdale
         ))
-        listTvshow.add(TvshowEntity(
+        listTvshow.add(MovieEntity(
+            "t9",
+            "Shameless",
+            "John Wells",
+            "United States",
+            "2011",
+            "Chicagoan Frank Gallagher is the proud single dad of six smart, industrious, independent kids, who without him would be... perhaps better off. When Frank's not at the bar spending what little money they have, he's passed out on the floor. But the kids have found ways to grow up in spite of him. They may not be like any family you know, but they make no apologies for being exactly who they are.",
+                listOf("Drama", "Komedi"),
+                R.drawable.tv_poster_shameless
+        ))
+        listTvshow.add(MovieEntity(
             "t10",
-            "Bring It On, Ghost",
-            "Park Joon-hwa",
-            "South Korea",
-            "2016",
-            "A college student with psychic abilities takes in an amnesiac ghost as his roommate who ends up helping him hunt down spooky spirits.",
-            "https://asianwiki.com/images/e/e4/Let%27s_Fight_Ghost-p1.jpg"
+            "The Simpson",
+            "Matt Groening",
+            "United States",
+            "1989",
+            "Set in Springfield, the average American town, the show focuses on the antics and everyday adventures of the Simpson family; Homer, Marge, Bart, Lisa and Maggie, as well as a virtual cast of thousands. Since the beginning, the series has been a pop culture icon, attracting hundreds of celebrities to guest star. The show has also made name for itself in its fearless satirical take on politics, media and American life in general.",
+                listOf("Family", "Animation", "Comedy"),
+                R.drawable.tv_poster_the_simpson
         ))
 
         return listTvshow

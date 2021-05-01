@@ -12,8 +12,9 @@ import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.data.MovieEntity
 import com.example.jetpack_submissions.databinding.FragmentMoviesBinding
 import com.example.jetpack_submissions.ui.detail.DetailActivity
+import com.example.jetpack_submissions.ui.home.MovieListener
 
-class MoviesFragment : Fragment(), MoviesAdapter.MoviesListener {
+class MoviesFragment : Fragment(), MovieListener {
 
     lateinit var viewModel: MoviesViewModel
     lateinit var binding: FragmentMoviesBinding
@@ -40,9 +41,9 @@ class MoviesFragment : Fragment(), MoviesAdapter.MoviesListener {
         }
     }
 
-    override fun moviesOnClick(movie: MovieEntity) {
+    override fun movieOnClick(entity: MovieEntity) {
         val intent = Intent(context, DetailActivity::class.java)
-        intent.putExtra("Movie", movie)
+        intent.putExtra("Movie", entity)
         startActivity(intent)
     }
 }

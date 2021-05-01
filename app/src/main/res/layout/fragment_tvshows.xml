@@ -9,6 +9,6 @@
         android:id="@+id/rv_movies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/items_tvshows"/>
+        tools:listitem="@layout/items_movies"/>
 
 </FrameLayout>

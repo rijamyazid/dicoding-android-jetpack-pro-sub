@@ -40,7 +40,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:text="@string/title"
-                    android:textSize="24sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_detail_poster"
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_detail_poster"
                     app:layout_constraintTop_toBottomOf="@+id/tv_detail_title"
@@ -66,7 +66,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:text="@string/releaseYear"
-                    android:textSize="24sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_detail_poster"
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_detail_poster"
                     app:layout_constraintTop_toBottomOf="@+id/tv_year"
@@ -92,7 +92,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:text="@string/director"
-                    android:textSize="24sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_detail_poster"
@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_detail_poster"
                     app:layout_constraintTop_toBottomOf="@+id/tv_director"
@@ -118,7 +118,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:text="@string/country"
-                    android:textSize="24sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_detail_poster"
@@ -130,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_detail_poster"
                     app:layout_constraintTop_toBottomOf="@+id/tv_country"
@@ -145,7 +145,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/genres"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -164,7 +164,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/description"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -175,7 +175,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 tools:text="@string/description_example"
-                android:textSize="18sp"/>
+                android:textSize="16sp"/>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
