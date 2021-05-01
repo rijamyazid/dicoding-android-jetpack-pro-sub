@@ -20,11 +20,11 @@ class DetailViewModelTest {
     @Test
     fun getMovieEntity() {
         assertNotNull(viewModel.getMovieEntity())
-        assertEquals(viewModel.getMovieEntity().title, movie.title)
-        assertEquals(viewModel.getMovieEntity().releaseYear, movie.releaseYear)
-        assertEquals(viewModel.getMovieEntity().country, movie.country)
-        assertEquals(viewModel.getMovieEntity().director, movie.director)
-        assertEquals(viewModel.getMovieEntity().genre, movie.genre)
-        assertEquals(viewModel.getMovieEntity().desc, movie.desc)
+        assertEquals(viewModel.getMovieEntity()?.title, movie.title)
+        assertEquals(viewModel.getMovieEntity()?.releaseYear, movie.releaseYear)
+        assertEquals(viewModel.getMovieEntity()?.country, movie.country)
+        assertEquals(viewModel.getMovieEntity()?.director, movie.director)
+        assertEquals(viewModel.getMovieEntity()?.genre, movie.genre)
+        assertEquals(viewModel.getMovieEntity()?.desc, movie.desc)
     }
 }

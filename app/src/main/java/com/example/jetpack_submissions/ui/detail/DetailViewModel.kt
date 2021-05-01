@@ -5,8 +5,7 @@ import com.example.jetpack_submissions.data.MovieEntity
 
 class DetailViewModel: ViewModel() {
 
-    private var movieEntity =
-        MovieEntity("", "", "", "", "", "", listOf(), 0)
+    private var movieEntity: MovieEntity? = null
 
     fun setMovieEntity(entity: MovieEntity?){
         if (entity != null) {

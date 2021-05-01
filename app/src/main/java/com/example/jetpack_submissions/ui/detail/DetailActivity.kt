@@ -1,13 +1,11 @@
 package com.example.jetpack_submissions.ui.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
-import com.example.jetpack_submissions.R
-import com.example.jetpack_submissions.data.MovieEntity
 import com.example.jetpack_submissions.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {

@@ -1,18 +1,15 @@
 package com.example.jetpack_submissions.ui.home.movies
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.data.MovieEntity
 import com.example.jetpack_submissions.databinding.FragmentMoviesBinding
-import com.example.jetpack_submissions.ui.detail.DetailActivity
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
 import com.example.jetpack_submissions.ui.home.MovieListener
 
