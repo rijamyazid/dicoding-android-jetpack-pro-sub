@@ -11,19 +11,22 @@ import com.example.jetpack_submissions.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityDetailBinding
-    lateinit var genresAdapter: GenresAdapter
-    lateinit var viewModel: DetailViewModel
-    val args: DetailActivityArgs by navArgs()
+    private lateinit var binding: ActivityDetailBinding
+    private lateinit var genresAdapter: GenresAdapter
+    private lateinit var viewModel: DetailViewModel
+    private val args: DetailActivityArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        setSupportActionBar(binding.toolbarDetail)
+        supportActionBar?.setTitle(R.string.detail)
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[DetailViewModel::class.java]
         genresAdapter = GenresAdapter()
 
         val movie = args.movie

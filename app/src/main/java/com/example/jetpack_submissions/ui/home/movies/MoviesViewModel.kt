@@ -1,10 +1,10 @@
 package com.example.jetpack_submissions.ui.home.movies
 
 import androidx.lifecycle.ViewModel
-import com.example.jetpack_submissions.utils.DataDummy
+import com.example.jetpack_submissions.data.source.Repository
 
-class MoviesViewModel: ViewModel() {
+class MoviesViewModel(private val repository: Repository) : ViewModel() {
 
-    fun getDataMovies() = DataDummy.generateDummyMovies()
+    fun getAllRemoteMovies() = repository.getAllRemoteMovies()
 
 }

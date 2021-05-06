@@ -6,33 +6,38 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.jetpack_submissions.data.MovieEntity
+import com.example.jetpack_submissions.data.source.remote.response.MoviesItem
 import com.example.jetpack_submissions.databinding.FragmentMoviesBinding
-import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
-import com.example.jetpack_submissions.ui.home.MovieListener
+import com.example.jetpack_submissions.viewmodel.ViewModelFactory
 
-class MoviesFragment : Fragment(), MovieListener {
+class MoviesFragment : Fragment(), MoviesAdapter.MovieListener {
 
     lateinit var viewModel: MoviesViewModel
     lateinit var binding: FragmentMoviesBinding
 
-    override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle? ): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentMoviesBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (activity != null){
-            viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[MoviesViewModel::class.java]
-            val movies = viewModel.getDataMovies()
+        if (activity != null) {
+            val factory = ViewModelFactory.getInstance()
+            viewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
 
             val moviesAdapter = MoviesAdapter(context, this)
-            moviesAdapter.setMovies(movies)
-            with(binding.rvMovies){
+
+            viewModel.getAllRemoteMovies().observe(viewLifecycleOwner, {
+                moviesAdapter.setMovies(it)
+                moviesAdapter.notifyDataSetChanged()
+            })
+
+            with(binding.rvMovies) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = moviesAdapter
@@ -40,8 +45,9 @@ class MoviesFragment : Fragment(), MovieListener {
         }
     }
 
-    override fun movieOnClick(entity: MovieEntity) {
-        val action = HomeFragmentDirections.actionHomeFragmentToDetailActivity(entity)
-        findNavController().navigate(action)
+    override fun movieOnClick(entity: MoviesItem) {
+//        val action = HomeFragmentDirections.actionHomeFragmentToDetailActivity(entity)
+//        findNavController().navigate(action)
+        TODO()
     }
 }

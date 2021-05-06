@@ -6,15 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.jetpack_submissions.R
-import com.example.jetpack_submissions.data.MovieEntity
+import com.example.jetpack_submissions.data.source.remote.response.MoviesItem
 import com.example.jetpack_submissions.databinding.ItemsMoviesBinding
-import com.example.jetpack_submissions.ui.home.MovieListener
 
 class MoviesAdapter(private val context: Context?, private val listener: MovieListener): RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
-    private var listMovie = ArrayList<MovieEntity>()
+    private var listMovie = ArrayList<MoviesItem>()
 
-    fun setMovies(movies: ArrayList<MovieEntity>?) {
+    fun setMovies(movies: ArrayList<MoviesItem>?) {
         if (movies == null) return
         listMovie.clear()
         listMovie.addAll(movies)
@@ -22,12 +21,16 @@ class MoviesAdapter(private val context: Context?, private val listener: MovieLi
 
     inner class MoviesViewHolder(private val binding: ItemsMoviesBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(movie: MovieEntity){
-            with(binding){
-                tvItemTitle.text = context?.getString(R.string.titleAndRelease, movie.title, movie.releaseYear)
-                tvItemDesc.text = movie.desc
+        fun bind(movie: MoviesItem) {
+            with(binding) {
+                tvItemTitle.text = context?.getString(
+                    R.string.titleAndRelease,
+                    movie.originalTitle,
+                    movie.releaseDate
+                )
+                tvItemDesc.text = movie.overview
                 Glide.with(itemView.context)
-                    .load(movie.imgPath)
+                    .load("https://image.tmdb.org/t/p/w500" + movie.posterPath)
                     .into(imgPoster)
 
                 itemView.setOnClickListener {
@@ -36,6 +39,10 @@ class MoviesAdapter(private val context: Context?, private val listener: MovieLi
             }
         }
 
+    }
+
+    interface MovieListener {
+        fun movieOnClick(entity: MoviesItem)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
