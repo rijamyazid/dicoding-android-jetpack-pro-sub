@@ -1,63 +1,66 @@
 package com.example.jetpack_submissions.data.source.remote.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class MovieResponse(
 
-	@field:SerializedName("page")
-	val page: Int,
+    @field:SerializedName("page")
+    val page: Int,
 
-	@field:SerializedName("total_pages")
-	val totalPages: Int,
+    @field:SerializedName("total_pages")
+    val totalPages: Int,
 
-	@field:SerializedName("results")
-	val results: ArrayList<MoviesItem>,
+    @field:SerializedName("results")
+    val results: ArrayList<MovieItem>,
 
-	@field:SerializedName("total_results")
-	val totalResults: Int
+    @field:SerializedName("total_results")
+    val totalResults: Int
 )
 
-data class MoviesItem(
+@Parcelize
+data class MovieItem(
 
-	@field:SerializedName("overview")
-	val overview: String,
+    @field:SerializedName("overview")
+    val overview: String,
 
-	@field:SerializedName("original_language")
-	val originalLanguage: String,
+    @field:SerializedName("original_language")
+    val originalLanguage: String,
 
-	@field:SerializedName("original_title")
-	val originalTitle: String,
+    @field:SerializedName("original_title")
+    val originalTitle: String,
 
-	@field:SerializedName("video")
+    @field:SerializedName("video")
 	val video: Boolean,
 
-	@field:SerializedName("title")
+    @field:SerializedName("title")
 	val title: String,
 
-	@field:SerializedName("genre_ids")
+    @field:SerializedName("genre_ids")
 	val genreIds: List<Int>,
 
-	@field:SerializedName("poster_path")
+    @field:SerializedName("poster_path")
 	val posterPath: String,
 
-	@field:SerializedName("backdrop_path")
+    @field:SerializedName("backdrop_path")
 	val backdropPath: String,
 
-	@field:SerializedName("release_date")
+    @field:SerializedName("release_date")
 	val releaseDate: String,
 
-	@field:SerializedName("popularity")
+    @field:SerializedName("popularity")
 	val popularity: Double,
 
-	@field:SerializedName("vote_average")
-	val voteAverage: Double,
+    @field:SerializedName("vote_average")
+    val voteAverage: Double,
 
-	@field:SerializedName("id")
-	val id: Int,
+    @field:SerializedName("id")
+    val id: Int,
 
-	@field:SerializedName("adult")
-	val adult: Boolean,
+    @field:SerializedName("adult")
+    val adult: Boolean,
 
-	@field:SerializedName("vote_count")
-	val voteCount: Int
-)
+    @field:SerializedName("vote_count")
+    val voteCount: Int
+) : Parcelable

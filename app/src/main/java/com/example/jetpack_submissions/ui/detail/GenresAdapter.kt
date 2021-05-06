@@ -9,9 +9,13 @@ class GenresAdapter: RecyclerView.Adapter<GenresAdapter.GenresViewHolder>() {
 
     var listGenre = listOf<String>()
 
-    fun setGenres(genres: List<String>?){
+    fun setGenres(genres: List<Int>?) {
         if (genres == null) return
-        listGenre = genres
+        val genre_str = arrayListOf<String>()
+        for (genre in genres) {
+            genre_str.add(genre.toString())
+        }
+        listGenre = genre_str
     }
 
     inner class GenresViewHolder(val binding: ItemsGenreBinding): RecyclerView.ViewHolder(binding.root){

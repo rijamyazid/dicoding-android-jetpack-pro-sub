@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jetpack_submissions.data.MovieEntity
 import com.example.jetpack_submissions.databinding.FragmentTvshowsBinding
-import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
 import com.example.jetpack_submissions.ui.home.MovieListener
 
 class TvshowsFragment : Fragment(), MovieListener {
@@ -46,8 +44,9 @@ class TvshowsFragment : Fragment(), MovieListener {
     }
 
     override fun movieOnClick(entity: MovieEntity) {
-        val action = HomeFragmentDirections.actionHomeFragmentToDetailActivity(entity)
-        findNavController().navigate(action)
+//        val action = HomeFragmentDirections.actionHomeFragmentToDetailActivity(entity)
+//        findNavController().navigate(action)
+        TODO()
     }
 
 }

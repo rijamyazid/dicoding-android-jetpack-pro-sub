@@ -20,7 +20,7 @@
         android:label="activity_detail"
         tools:layout="@layout/activity_detail" >
         <argument
-            android:name="movie"
-            app:argType="com.example.jetpack_submissions.data.MovieEntity" />
+            android:name="movieItem"
+            app:argType="com.example.jetpack_submissions.data.source.remote.response.MovieItem" />
     </activity>
 </navigation>

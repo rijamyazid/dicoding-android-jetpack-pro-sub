@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.databinding.ActivityDetailBinding
 
@@ -29,25 +30,30 @@ class DetailActivity : AppCompatActivity() {
         )[DetailViewModel::class.java]
         genresAdapter = GenresAdapter()
 
-        val movie = args.movie
+        val movie = args.movieItem
         viewModel.setMovieEntity(movie)
-        val vmMovie = viewModel.getMovieEntity()
-        binding.tvTitleContent.text = vmMovie?.title
-        binding.tvYearContent.text = getString(R.string.release_year_style2, vmMovie?.releaseYear)
-        binding.tvCountryContent.text = vmMovie?.country
-        binding.tvDirectorContent.text = vmMovie?.director
-        binding.tvDetailDescription.text = vmMovie?.desc
+        viewModel.movieEntity.observe(this, {
+            binding.tvTitleContent.text = it.originalTitle
+            binding.tvYearContent.text = getString(R.string.release_year_style2, it.releaseDate)
+            binding.tvCountryContent.text = it.originalLanguage
+            binding.tvDirectorContent.text = it.popularity.toString()
+            binding.tvDetailDescription.text = it.overview
 
-        Glide.with(this)
-                .load(vmMovie?.imgPath)
+            Glide.with(this)
+                .load("https://image.tmdb.org/t/p/w500" + it.posterPath)
+                .apply(
+                    RequestOptions.placeholderOf(R.drawable.ic_loading)
+                        .error(R.drawable.ic_error)
+                )
                 .into(binding.imgDetailPoster)
 
-        with(binding.rvGenres){
-            layoutManager = GridLayoutManager(context, 3)
-            setHasFixedSize(true)
-            genresAdapter.setGenres(vmMovie?.genre)
-            adapter = genresAdapter
-        }
+            with(binding.rvGenres) {
+                layoutManager = GridLayoutManager(context, 3)
+                setHasFixedSize(true)
+                genresAdapter.setGenres(it.genreIds)
+                adapter = genresAdapter
+            }
+        })
 
     }
 }
