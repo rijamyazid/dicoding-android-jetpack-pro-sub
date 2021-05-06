@@ -1,4 +1,4 @@
-package com.example.jetpack_submissions.ui.detail
+package com.example.jetpack_submissions.ui.detail.tvshow
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,33 +8,34 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.jetpack_submissions.R
-import com.example.jetpack_submissions.databinding.ActivityDetailBinding
+import com.example.jetpack_submissions.databinding.ActivityTvshowDetailBinding
+import com.example.jetpack_submissions.ui.detail.GenresAdapter
 
-class DetailActivity : AppCompatActivity() {
+class TVShowDetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDetailBinding
+    private lateinit var binding: ActivityTvshowDetailBinding
     private lateinit var genresAdapter: GenresAdapter
-    private lateinit var viewModel: DetailViewModel
-    private val args: DetailActivityArgs by navArgs()
+    private lateinit var viewModel: TVShowDetailViewModel
+    private val args: TVShowDetailActivityArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityDetailBinding.inflate(layoutInflater)
+        binding = ActivityTvshowDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.setTitle(R.string.detail)
+        supportActionBar?.setTitle(R.string.tvshow_detail)
 
+        genresAdapter = GenresAdapter()
         viewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
-        )[DetailViewModel::class.java]
-        genresAdapter = GenresAdapter()
+        )[TVShowDetailViewModel::class.java]
 
-        val movie = args.movieItem
-        viewModel.setMovieEntity(movie)
-        viewModel.movieEntity.observe(this, {
-            binding.tvTitleContent.text = it.originalTitle
-            binding.tvYearContent.text = getString(R.string.release_year_style2, it.releaseDate)
+        val tvshow = args.tvshowItem
+        viewModel.setTVShowEntity(tvshow)
+        viewModel.tvshowEntity.observe(this, {
+            binding.tvTitleContent.text = it.name
+            binding.tvYearContent.text = getString(R.string.release_year_style2, it.firstAirDate)
             binding.tvCountryContent.text = it.originalLanguage
             binding.tvDirectorContent.text = it.popularity.toString()
             binding.tvDetailDescription.text = it.overview

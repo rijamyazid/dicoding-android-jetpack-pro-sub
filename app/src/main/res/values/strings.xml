@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Jetpack_Submissions</string>
-    <string name="home">Home</string>
-    <string name="detail">Detail Movie</string>
+    <string name="home">Popular Movies &amp; TVShows</string>
+    <string name="movie_detail">Movie Detail</string>
+    <string name="tvshow_detail">TVShow Detail</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="movies">Movies</string>
     <string name="tvshows">TV Shows</string>

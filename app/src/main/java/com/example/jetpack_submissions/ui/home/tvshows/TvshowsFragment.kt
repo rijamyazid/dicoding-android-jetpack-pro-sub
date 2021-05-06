@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.jetpack_submissions.data.MovieEntity
+import com.example.jetpack_submissions.data.source.remote.LoadingCallback
+import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
 import com.example.jetpack_submissions.databinding.FragmentTvshowsBinding
-import com.example.jetpack_submissions.ui.home.MovieListener
+import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
+import com.example.jetpack_submissions.viewmodel.ViewModelFactory
 
-class TvshowsFragment : Fragment(), MovieListener {
+class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener, LoadingCallback {
 
     lateinit var binding: FragmentTvshowsBinding
     lateinit var viewModel: TvshowsViewModel
@@ -27,14 +30,15 @@ class TvshowsFragment : Fragment(), MovieListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            viewModel = ViewModelProvider(
-                this,
-                ViewModelProvider.NewInstanceFactory()
-            )[TvshowsViewModel::class.java]
-            val tvShows = viewModel.getDataTvshows()
+            val factory = ViewModelFactory.getInstance(this)
+            viewModel = ViewModelProvider(this, factory)[TvshowsViewModel::class.java]
 
             val tvShowsAdapter = TvshowsAdapter(context, this)
-            tvShowsAdapter.setTvshows(tvShows)
+            viewModel.getDataTvshows().observe(viewLifecycleOwner, {
+                tvShowsAdapter.setTvshows(it)
+                tvShowsAdapter.notifyDataSetChanged()
+            })
+
             with(binding.rvTvshows) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
@@ -43,10 +47,13 @@ class TvshowsFragment : Fragment(), MovieListener {
         }
     }
 
-    override fun movieOnClick(entity: MovieEntity) {
-//        val action = HomeFragmentDirections.actionHomeFragmentToDetailActivity(entity)
-//        findNavController().navigate(action)
-        TODO()
+    override fun tvshowOnClick(tvshow: TVShowItem) {
+        val action = HomeFragmentDirections.actionHomeFragmentToTVShowDetailActivity(tvshow)
+        findNavController().navigate(action)
+    }
+
+    override fun isOnLoadingState(status: Boolean) {
+        binding.progressBar2.visibility = if (status) View.VISIBLE else View.GONE
     }
 
 }

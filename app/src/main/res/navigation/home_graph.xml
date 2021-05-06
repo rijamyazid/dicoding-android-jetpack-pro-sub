@@ -9,18 +9,30 @@
         android:id="@+id/homeFragment"
         android:name="com.example.jetpack_submissions.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_detailActivity"
             app:destination="@id/detailActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_TVShowDetailActivity"
+            app:destination="@id/TVShowDetailActivity" />
     </fragment>
     <activity
         android:id="@+id/detailActivity"
-        android:name="com.example.jetpack_submissions.ui.detail.DetailActivity"
+        android:name="com.example.jetpack_submissions.ui.detail.movie.MovieDetailActivity"
         android:label="activity_detail"
-        tools:layout="@layout/activity_detail" >
+        tools:layout="@layout/activity_movie_detail">
         <argument
             android:name="movieItem"
             app:argType="com.example.jetpack_submissions.data.source.remote.response.MovieItem" />
+    </activity>
+    <activity
+        android:id="@+id/TVShowDetailActivity"
+        android:name="com.example.jetpack_submissions.ui.detail.tvshow.TVShowDetailActivity"
+        android:label="activity_tvshow_detail"
+        tools:layout="@layout/activity_tvshow_detail">
+        <argument
+            android:name="tvshowItem"
+            app:argType="com.example.jetpack_submissions.data.source.remote.response.TVShowItem" />
     </activity>
 </navigation>

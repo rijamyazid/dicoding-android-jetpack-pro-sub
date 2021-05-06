@@ -6,6 +6,7 @@ import com.example.jetpack_submissions.data.source.Repository
 import com.example.jetpack_submissions.data.source.remote.LoadingCallback
 import com.example.jetpack_submissions.di.Injection
 import com.example.jetpack_submissions.ui.home.movies.MoviesViewModel
+import com.example.jetpack_submissions.ui.home.tvshows.TvshowsViewModel
 
 class ViewModelFactory private constructor(private val repository: Repository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -27,6 +28,9 @@ class ViewModelFactory private constructor(private val repository: Repository) :
         when {
             modelClass.isAssignableFrom(MoviesViewModel::class.java) -> {
                 return MoviesViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(TvshowsViewModel::class.java) -> {
+                return TvshowsViewModel(repository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

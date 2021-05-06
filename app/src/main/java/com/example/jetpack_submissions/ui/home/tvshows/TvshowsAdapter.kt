@@ -5,44 +5,54 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.jetpack_submissions.R
-import com.example.jetpack_submissions.data.MovieEntity
+import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
 import com.example.jetpack_submissions.databinding.ItemsMoviesBinding
-import com.example.jetpack_submissions.ui.home.MovieListener
 
-class TvshowsAdapter(val context: Context?, val listener: MovieListener): RecyclerView.Adapter<TvshowsAdapter.TvshowsViewHolder>() {
+class TvshowsAdapter(val context: Context?, val listener: TVShowListener) :
+    RecyclerView.Adapter<TvshowsAdapter.TVshowsViewHolder>() {
 
-    private var listTvshows = ArrayList<MovieEntity>()
+    private var listTvshows = ArrayList<TVShowItem>()
 
-    fun setTvshows(tvShows: ArrayList<MovieEntity>?){
+    fun setTvshows(tvShows: ArrayList<TVShowItem>?) {
         if (tvShows == null) return
         listTvshows.clear()
         listTvshows.addAll(tvShows)
     }
 
-    inner class TvshowsViewHolder(private val binding: ItemsMoviesBinding)
-        : RecyclerView.ViewHolder(binding.root){
-            fun bind(tvShow: MovieEntity){
-                with(binding){
-                    tvItemTitle.text = context?.getString(R.string.titleAndRelease, tvShow.title, tvShow.releaseYear)
-                    tvItemDesc.text = tvShow.desc
-                    Glide.with(itemView.context)
-                        .load(tvShow.imgPath)
-                        .into(imgPoster)
+    inner class TVshowsViewHolder(private val binding: ItemsMoviesBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(tvShow: TVShowItem) {
+            with(binding) {
+                tvItemTitle.text =
+                    context?.getString(R.string.titleAndRelease, tvShow.name, tvShow.firstAirDate)
+                tvItemDesc.text = tvShow.overview
+                Glide.with(itemView.context)
+                    .load("https://image.tmdb.org/t/p/w500" + tvShow.posterPath)
+                    .apply(
+                        RequestOptions.placeholderOf(R.drawable.ic_loading)
+                            .error(R.drawable.ic_error)
+                    )
+                    .into(imgPoster)
 
-                    itemView.setOnClickListener {
-                        listener.movieOnClick(tvShow)
-                    }
+                itemView.setOnClickListener {
+                    listener.tvshowOnClick(tvShow)
                 }
             }
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvshowsViewHolder {
+    interface TVShowListener {
+        fun tvshowOnClick(tvshow: TVShowItem)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TVshowsViewHolder {
         val binding = ItemsMoviesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TvshowsViewHolder(binding)
+        return TVshowsViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: TvshowsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TVshowsViewHolder, position: Int) {
         val tvShow = listTvshows[position]
         holder.bind(tvShow)
     }
