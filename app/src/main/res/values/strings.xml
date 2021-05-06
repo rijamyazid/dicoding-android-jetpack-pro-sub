@@ -4,7 +4,8 @@
     <string name="movies">Movies</string>
     <string name="tvshows">TV Shows</string>
     <string name="title">Title</string>
-    <string name="releaseYear">Release Year</string>
+    <string name="release_year">Release Year</string>
+    <string name="release_year_style2">Release Year: %1$s</string>
     <string name="titleAndRelease">%1$s (%2$s)</string>
     <string name="country">Country</string>
     <string name="director">Director</string>

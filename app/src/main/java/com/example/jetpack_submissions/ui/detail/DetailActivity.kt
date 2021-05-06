@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
+import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
@@ -20,6 +21,7 @@ class DetailActivity : AppCompatActivity() {
 
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+//        setSupportActionBar(binding.toolbarDetail)
 
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailViewModel::class.java]
         genresAdapter = GenresAdapter()
@@ -27,8 +29,8 @@ class DetailActivity : AppCompatActivity() {
         val movie = args.movie
         viewModel.setMovieEntity(movie)
         val vmMovie = viewModel.getMovieEntity()
-        binding.tvDetailTitleContent.text = vmMovie?.title
-        binding.tvYearContent.text = vmMovie?.releaseYear
+        binding.tvTitleContent.text = vmMovie?.title
+        binding.tvYearContent.text = getString(R.string.release_year_style2, vmMovie?.releaseYear)
         binding.tvCountryContent.text = vmMovie?.country
         binding.tvDirectorContent.text = vmMovie?.director
         binding.tvDetailDescription.text = vmMovie?.desc
