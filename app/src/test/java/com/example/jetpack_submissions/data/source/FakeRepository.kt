@@ -6,7 +6,7 @@ import com.example.jetpack_submissions.data.source.remote.RemoteDataSource
 import com.example.jetpack_submissions.data.source.remote.response.MovieItem
 import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
 
-class Repository private constructor(private val remoteDataSource: RemoteDataSource) : DataSource {
+class FakeRepository(private val remoteDataSource: RemoteDataSource) : DataSource {
 
     private val remoteMoviesResult = MutableLiveData<ArrayList<MovieItem>>()
     private val remoteTVShowsResult = MutableLiveData<ArrayList<TVShowItem>>()
@@ -16,18 +16,6 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
 
     private val _isConnectionSuccesfull = MutableLiveData<Boolean>()
     private val isConnectionSuccesfull: LiveData<Boolean> = _isConnectionSuccesfull
-
-    companion object {
-
-        @Volatile
-        private var instance: Repository? = null
-
-        fun getInstance(remoteDataSource: RemoteDataSource): Repository =
-            instance ?: synchronized(this) {
-                instance ?: Repository(remoteDataSource).apply { instance = this }
-            }
-
-    }
 
     override fun getAllRemoteMovies(): LiveData<ArrayList<MovieItem>> {
         remoteDataSource.getAllRemoteMovies(object : RemoteDataSource.LoadMoviesCallback {

@@ -40,19 +40,17 @@ class RemoteDataSource private constructor(private val callback: LoadingCallback
                     callback.isOnLoadingState(false)
                     moviesCallback.onAllMoviesReceived(response.body()?.results as ArrayList<MovieItem>)
                 } else {
-                    moviesCallback.onAllMoviesReceived(null)
                     callback.isOnLoadingState(false)
                     callback.isConnectionSuccesfull(ConnectionStatus(false, response.message()))
                 }
             }
 
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                moviesCallback.onAllMoviesReceived(null)
                 callback.isOnLoadingState(false)
                 callback.isConnectionSuccesfull(
                     ConnectionStatus(
                         false,
-                        "Terjadi masalah dengan jaringan anda"
+                        "Terjadi masalah dengan jaringan anda, Memuat data cache"
                     )
                 )
             }
@@ -76,14 +74,12 @@ class RemoteDataSource private constructor(private val callback: LoadingCallback
                     callback.isOnLoadingState(false)
                     tvshowCallback.onAllTVShowsReceived(response.body()?.results as ArrayList<TVShowItem>)
                 } else {
-                    tvshowCallback.onAllTVShowsReceived(null)
                     callback.isOnLoadingState(false)
                     callback.isConnectionSuccesfull(ConnectionStatus(false, response.message()))
                 }
             }
 
             override fun onFailure(call: Call<TVShowResponse>, t: Throwable) {
-                tvshowCallback.onAllTVShowsReceived(null)
                 callback.isOnLoadingState(false)
                 callback.isConnectionSuccesfull(
                     ConnectionStatus(
@@ -97,11 +93,13 @@ class RemoteDataSource private constructor(private val callback: LoadingCallback
     }
 
     interface LoadMoviesCallback {
-        fun onAllMoviesReceived(moviesResponses: ArrayList<MovieItem>?)
+        fun onAllMoviesReceived(moviesResponses: ArrayList<MovieItem>)
+        fun isOnLoadingStates(status: Boolean)
+        fun isConnectionSuccesfull(status: Boolean)
     }
 
     interface LoadTVShowCallback {
-        fun onAllTVShowsReceived(tvshowResponses: ArrayList<TVShowItem>?)
+        fun onAllTVShowsReceived(tvshowResponses: ArrayList<TVShowItem>)
     }
 
 }

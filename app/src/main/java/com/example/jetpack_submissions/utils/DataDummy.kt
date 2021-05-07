@@ -2,8 +2,137 @@ package com.example.jetpack_submissions.utils
 
 import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.data.MovieEntity
+import com.example.jetpack_submissions.data.source.remote.response.MovieItem
+import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
 
 object DataDummy {
+
+    fun generateRemoteDummyMovies(): ArrayList<MovieItem> {
+
+        val listMovie = ArrayList<MovieItem>()
+
+        listMovie.add(
+            MovieItem(
+                "Washed-up MMA fighter Cole Young, unaware of his heritage, and hunted by Emperor Shang Tsung's best warrior, Sub-Zero, seeks out and trains with Earth's greatest champions as he prepares to stand against the enemies of Outworld in a high stakes battle for the universe.",
+                "en",
+                "Mortal Kombat",
+                false,
+                "Mortal Kombat",
+                listOf(14, 28, 12, 878, 53),
+                "/xGuOF1T3WmPsAcQEQJfnG7Ud9f8.jpg",
+                "/9yBVqNruk6Ykrwc32qrK2TIE5xw.jpg",
+                "2021-04-07",
+                4614.697,
+                7.8,
+                460465,
+                false,
+                2079
+            )
+        )
+
+        listMovie.add(
+            MovieItem(
+                "In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.",
+                "en",
+                "Godzilla vs. Kong",
+                false,
+                "Godzilla vs. Kong",
+                listOf(878, 28, 18),
+                "/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg",
+                "/inJjDhCjfhh3RtrJWBmmDqeuSYC.jpg",
+                "2021-03-24",
+                2543.473,
+                8.2,
+                399566,
+                false,
+                5255
+            )
+        )
+
+        listMovie.add(
+            MovieItem(
+                "Victoria is a young mother trying to put her dark past as a Russian drug courier behind her, but retired cop Damon forces Victoria to do his bidding by holding her daughter hostage. Now, Victoria must use guns, guts and a motorcycle to take out a series of violent gangsters—or she may never see her child again.",
+                "en",
+                "Vanquish",
+                false,
+                "Vanquish",
+                listOf(28, 80, 53),
+                "/AoWY1gkcNzabh229Icboa1Ff0BM.jpg",
+                "/mYM8x2Atv4MaLulaV0KVJWI1Djv.jpg",
+                "2021-04-16",
+                2535.022,
+                6.0,
+                804435,
+                false,
+                51
+            )
+        )
+
+        return listMovie
+
+    }
+
+    fun generateRemoteDummyTVShows(): ArrayList<TVShowItem> {
+
+        val listMovie = ArrayList<TVShowItem>()
+
+        listMovie.add(
+            TVShowItem(
+                "2021-03-19",
+                "Following the events of “Avengers: Endgame”, the Falcon, Sam Wilson and the Winter Soldier, Bucky Barnes team up in a global adventure that tests their abilities, and their patience.",
+                "en",
+                listOf(10765, 10759, 18, 10768),
+                "/6kbAMLteGO8yyewYau6bJ683sw7.jpg",
+                listOf("US"),
+                "/b0WmHGc8LHTdGCVzxRb3IBMur57.jpg",
+                "The Falcon and the Winter Soldier",
+                2008.626,
+                7.9,
+                "The Falcon and the Winter Soldier",
+                88396,
+                5264,
+            )
+        )
+
+        listMovie.add(
+            TVShowItem(
+                "2021-03-26",
+                "Mark Grayson is a normal teenager except for the fact that his father is the most powerful superhero on the planet. Shortly after his seventeenth birthday, Mark begins to develop powers of his own and enters into his father’s tutelage.",
+                "en",
+                listOf(16, 10759, 18, 10765),
+                "/yDWJYRAwMNKbIYT8ZB33qy84uzO.jpg",
+                listOf("US"),
+                "/6UH52Fmau8RPsMAbQbjwN3wJSCj.jpg",
+                "Invincible",
+                1967.083,
+                8.9,
+                "Invincible",
+                95557,
+                1237,
+            )
+        )
+
+        listMovie.add(
+            TVShowItem(
+                "2017-09-25",
+                "A young surgeon with Savant syndrome is recruited into the surgical unit of a prestigious hospital. The question will arise: can a person who doesn't have the ability to relate to people actually save their lives.",
+                "en",
+                listOf(18),
+                "/6tfT03sGp9k4c0J3dypjrI8TSAI.jpg",
+                listOf("US"),
+                "/mZjZgY6ObiKtVuKVDrnS9VnuNlE.jpg",
+                "The Good Doctor",
+                1303.627,
+                8.6,
+                "The Good Doctor",
+                71712,
+                8256,
+            )
+        )
+
+        return listMovie
+
+    }
 
     fun generateDummyMovies(): ArrayList<MovieEntity> {
 
@@ -11,9 +140,9 @@ object DataDummy {
 
         listMovie.add(
             MovieEntity(
-            "m1",
-            "Alita: Battle Angel",
-            "Robert Rodriguez",
+                "m1",
+                "Alita: Battle Angel",
+                "Robert Rodriguez",
             "United States",
             "2019",
             "When Alita awakens with no memory of who she is in a future world she does not recognize, she is taken in by Ido, a compassionate doctor who realizes that somewhere in this abandoned cyborg shell is the heart and soul of a young woman with an extraordinary past.",
