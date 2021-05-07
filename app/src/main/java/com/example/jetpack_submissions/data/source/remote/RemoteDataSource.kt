@@ -1,7 +1,6 @@
 package com.example.jetpack_submissions.data.source.remote
 
 import com.example.jetpack_submissions.BuildConfig
-import com.example.jetpack_submissions.data.ConnectionStatus
 import com.example.jetpack_submissions.data.source.remote.api.ApiConfig
 import com.example.jetpack_submissions.data.source.remote.response.MovieItem
 import com.example.jetpack_submissions.data.source.remote.response.MovieResponse
@@ -11,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RemoteDataSource private constructor(private val callback: LoadingCallback) {
+class RemoteDataSource {
 
     companion object {
 
@@ -21,38 +20,32 @@ class RemoteDataSource private constructor(private val callback: LoadingCallback
         @Volatile
         private var instance: RemoteDataSource? = null
 
-        fun getInstance(callback: LoadingCallback): RemoteDataSource =
+        fun getInstance(): RemoteDataSource =
             instance ?: synchronized(this) {
-                instance ?: RemoteDataSource(callback).apply { instance = this }
+                instance ?: RemoteDataSource().apply { instance = this }
             }
 
     }
 
     fun getAllRemoteMovies(moviesCallback: LoadMoviesCallback) {
-        callback.isOnLoadingState(true)
-        callback.isConnectionSuccesfull(ConnectionStatus(true, ""))
-
+        moviesCallback.isOnLoadingStates(true)
+        moviesCallback.isConnectionSuccessful(true)
         val client =
             ApiConfig.getApiService().getMovies(BuildConfig.API_KEY, LANGUAGE_ENGLISH, PAGE_DEFAULT)
         client.enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 if (response.isSuccessful) {
-                    callback.isOnLoadingState(false)
+                    moviesCallback.isOnLoadingStates(false)
                     moviesCallback.onAllMoviesReceived(response.body()?.results as ArrayList<MovieItem>)
                 } else {
-                    callback.isOnLoadingState(false)
-                    callback.isConnectionSuccesfull(ConnectionStatus(false, response.message()))
+                    moviesCallback.isOnLoadingStates(false)
+                    moviesCallback.isConnectionSuccessful(false)
                 }
             }
 
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                callback.isOnLoadingState(false)
-                callback.isConnectionSuccesfull(
-                    ConnectionStatus(
-                        false,
-                        "Terjadi masalah dengan jaringan anda, Memuat data cache"
-                    )
-                )
+                moviesCallback.isOnLoadingStates(false)
+                moviesCallback.isConnectionSuccessful(false)
             }
 
         })
@@ -60,8 +53,8 @@ class RemoteDataSource private constructor(private val callback: LoadingCallback
     }
 
     fun getAllRemoteTVShows(tvshowCallback: LoadTVShowCallback) {
-        callback.isOnLoadingState(true)
-        callback.isConnectionSuccesfull(ConnectionStatus(true, ""))
+        tvshowCallback.isOnLoadingStates(true)
+        tvshowCallback.isConnectionSuccessful(true)
         val client =
             ApiConfig.getApiService()
                 .getTVShows(BuildConfig.API_KEY, LANGUAGE_ENGLISH, PAGE_DEFAULT)
@@ -71,22 +64,17 @@ class RemoteDataSource private constructor(private val callback: LoadingCallback
                 response: Response<TVShowResponse>
             ) {
                 if (response.isSuccessful) {
-                    callback.isOnLoadingState(false)
+                    tvshowCallback.isOnLoadingStates(false)
                     tvshowCallback.onAllTVShowsReceived(response.body()?.results as ArrayList<TVShowItem>)
                 } else {
-                    callback.isOnLoadingState(false)
-                    callback.isConnectionSuccesfull(ConnectionStatus(false, response.message()))
+                    tvshowCallback.isOnLoadingStates(false)
+                    tvshowCallback.isConnectionSuccessful(false)
                 }
             }
 
             override fun onFailure(call: Call<TVShowResponse>, t: Throwable) {
-                callback.isOnLoadingState(false)
-                callback.isConnectionSuccesfull(
-                    ConnectionStatus(
-                        false,
-                        "Terjadi masalah dengan jaringan anda"
-                    )
-                )
+                tvshowCallback.isOnLoadingStates(false)
+                tvshowCallback.isConnectionSuccessful(false)
             }
 
         })
@@ -95,11 +83,13 @@ class RemoteDataSource private constructor(private val callback: LoadingCallback
     interface LoadMoviesCallback {
         fun onAllMoviesReceived(moviesResponses: ArrayList<MovieItem>)
         fun isOnLoadingStates(status: Boolean)
-        fun isConnectionSuccesfull(status: Boolean)
+        fun isConnectionSuccessful(status: Boolean)
     }
 
     interface LoadTVShowCallback {
         fun onAllTVShowsReceived(tvshowResponses: ArrayList<TVShowItem>)
+        fun isOnLoadingStates(status: Boolean)
+        fun isConnectionSuccessful(status: Boolean)
     }
 
 }

@@ -3,7 +3,6 @@ package com.example.jetpack_submissions.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.jetpack_submissions.data.source.Repository
-import com.example.jetpack_submissions.data.source.remote.LoadingCallback
 import com.example.jetpack_submissions.di.Injection
 import com.example.jetpack_submissions.ui.home.movies.MoviesViewModel
 import com.example.jetpack_submissions.ui.home.tvshows.TvshowsViewModel
@@ -15,9 +14,9 @@ class ViewModelFactory private constructor(private val repository: Repository) :
         @Volatile
         private var instance: ViewModelFactory? = null
 
-        fun getInstance(callback: LoadingCallback): ViewModelFactory =
+        fun getInstance(): ViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideRepository(callback)).apply {
+                instance ?: ViewModelFactory(Injection.provideRepository()).apply {
                     instance = this
                 }
             }

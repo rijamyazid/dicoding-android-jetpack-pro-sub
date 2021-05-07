@@ -12,10 +12,10 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
     private val remoteTVShowsResult = MutableLiveData<ArrayList<TVShowItem>>()
 
     private val _isOnloadingStates = MutableLiveData<Boolean>()
-    private val isOnloadingStates: LiveData<Boolean> = _isOnloadingStates
+    val isOnloadingStates: LiveData<Boolean> = _isOnloadingStates
 
-    private val _isConnectionSuccesfull = MutableLiveData<Boolean>()
-    private val isConnectionSuccesfull: LiveData<Boolean> = _isConnectionSuccesfull
+    private val _isConnectionSuccessful = MutableLiveData<Boolean>()
+    val isConnectionSuccessful: LiveData<Boolean> = _isConnectionSuccessful
 
     companion object {
 
@@ -39,8 +39,8 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
                 _isOnloadingStates.value = status
             }
 
-            override fun isConnectionSuccesfull(status: Boolean) {
-                _isConnectionSuccesfull.value = status
+            override fun isConnectionSuccessful(status: Boolean) {
+                _isConnectionSuccessful.value = status
             }
         })
         return remoteMoviesResult
@@ -50,6 +50,14 @@ class Repository private constructor(private val remoteDataSource: RemoteDataSou
         remoteDataSource.getAllRemoteTVShows(object : RemoteDataSource.LoadTVShowCallback {
             override fun onAllTVShowsReceived(tvshowResponses: ArrayList<TVShowItem>) {
                 remoteTVShowsResult.value = tvshowResponses
+            }
+
+            override fun isOnLoadingStates(status: Boolean) {
+                _isOnloadingStates.value = status
+            }
+
+            override fun isConnectionSuccessful(status: Boolean) {
+                _isConnectionSuccessful.value = status
             }
         })
         return remoteTVShowsResult

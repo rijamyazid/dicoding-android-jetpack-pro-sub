@@ -8,15 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.jetpack_submissions.data.ConnectionStatus
-import com.example.jetpack_submissions.data.source.remote.LoadingCallback
 import com.example.jetpack_submissions.data.source.remote.response.MovieItem
 import com.example.jetpack_submissions.databinding.FragmentMoviesBinding
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
 import com.example.jetpack_submissions.viewmodel.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
-class MoviesFragment : Fragment(), MoviesAdapter.MovieListener, LoadingCallback {
+class MoviesFragment : Fragment(), MoviesAdapter.MovieListener {
 
     lateinit var viewModel: MoviesViewModel
     lateinit var binding: FragmentMoviesBinding
@@ -32,7 +30,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener, LoadingCallback 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(this)
+            val factory = ViewModelFactory.getInstance()
             viewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
 
             val moviesAdapter = MoviesAdapter(context, this)
@@ -53,8 +51,12 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener, LoadingCallback 
             })
 
             viewModel.getConnectionStates().observe(viewLifecycleOwner, {
-                if (!it.isSuccess) {
-                    Snackbar.make(requireView(), it.message, Snackbar.LENGTH_LONG).show()
+                if (!it) {
+                    Snackbar.make(
+                        requireView(),
+                        "Koneksi bermaslah, menggunakan data cache untuk sementara jika tersedia",
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
             })
         }
@@ -65,11 +67,4 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener, LoadingCallback 
         findNavController().navigate(action)
     }
 
-    override fun isOnLoadingState(status: Boolean) {
-        viewModel.setLoadingStates(status)
-    }
-
-    override fun isConnectionSuccesfull(status: ConnectionStatus) {
-        viewModel.setConnectionStates(status)
-    }
 }

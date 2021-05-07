@@ -8,15 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.jetpack_submissions.data.ConnectionStatus
-import com.example.jetpack_submissions.data.source.remote.LoadingCallback
 import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
 import com.example.jetpack_submissions.databinding.FragmentTvshowsBinding
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
 import com.example.jetpack_submissions.viewmodel.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
-class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener, LoadingCallback {
+class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener {
 
     lateinit var binding: FragmentTvshowsBinding
     lateinit var viewModel: TvshowsViewModel
@@ -32,7 +30,7 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener, LoadingCallba
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(this)
+            val factory = ViewModelFactory.getInstance()
             viewModel = ViewModelProvider(this, factory)[TvshowsViewModel::class.java]
 
             val tvShowsAdapter = TvshowsAdapter(context, this)
@@ -52,8 +50,12 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener, LoadingCallba
             })
 
             viewModel.getConnectionStates().observe(viewLifecycleOwner, {
-                if (!it.isSuccess) {
-                    Snackbar.make(requireView(), it.message, Snackbar.LENGTH_LONG).show()
+                if (!it) {
+                    Snackbar.make(
+                        requireView(),
+                        "Koneksi bermaslah, menggunakan data cache untuk sementara jika tersedia",
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
             })
 
@@ -63,14 +65,6 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener, LoadingCallba
     override fun tvshowOnClick(tvshow: TVShowItem) {
         val action = HomeFragmentDirections.actionHomeFragmentToTVShowDetailActivity(tvshow)
         findNavController().navigate(action)
-    }
-
-    override fun isOnLoadingState(status: Boolean) {
-        viewModel.setLoadingStates(status)
-    }
-
-    override fun isConnectionSuccesfull(status: ConnectionStatus) {
-        viewModel.setConnectionStates(status)
     }
 
 }
