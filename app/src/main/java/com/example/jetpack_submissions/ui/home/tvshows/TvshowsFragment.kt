@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.jetpack_submissions.data.ConnectionStatus
 import com.example.jetpack_submissions.data.source.remote.LoadingCallback
 import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
 import com.example.jetpack_submissions.databinding.FragmentTvshowsBinding
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
 import com.example.jetpack_submissions.viewmodel.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener, LoadingCallback {
 
@@ -44,6 +46,17 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener, LoadingCallba
                 setHasFixedSize(true)
                 adapter = tvShowsAdapter
             }
+
+            viewModel.getLoadingStates().observe(viewLifecycleOwner, {
+                binding.progressBar2.visibility = if (it) View.VISIBLE else View.GONE
+            })
+
+            viewModel.getConnectionStates().observe(viewLifecycleOwner, {
+                if (!it.isSuccess) {
+                    Snackbar.make(requireView(), it.message, Snackbar.LENGTH_LONG).show()
+                }
+            })
+
         }
     }
 
@@ -53,7 +66,11 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener, LoadingCallba
     }
 
     override fun isOnLoadingState(status: Boolean) {
-        binding.progressBar2.visibility = if (status) View.VISIBLE else View.GONE
+        viewModel.setLoadingStates(status)
+    }
+
+    override fun isConnectionSuccesfull(status: ConnectionStatus) {
+        viewModel.setConnectionStates(status)
     }
 
 }

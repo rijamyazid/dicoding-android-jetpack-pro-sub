@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.jetpack_submissions.data.ConnectionStatus
 import com.example.jetpack_submissions.data.source.remote.LoadingCallback
 import com.example.jetpack_submissions.data.source.remote.response.MovieItem
 import com.example.jetpack_submissions.databinding.FragmentMoviesBinding
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
 import com.example.jetpack_submissions.viewmodel.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 class MoviesFragment : Fragment(), MoviesAdapter.MovieListener, LoadingCallback {
 
@@ -46,8 +48,14 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener, LoadingCallback 
                 adapter = moviesAdapter
             }
 
-            viewModel.isLoading.observe(viewLifecycleOwner, {
+            viewModel.getLoadingStates().observe(viewLifecycleOwner, {
                 binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+            })
+
+            viewModel.getConnectionStates().observe(viewLifecycleOwner, {
+                if (!it.isSuccess) {
+                    Snackbar.make(requireView(), it.message, Snackbar.LENGTH_LONG).show()
+                }
             })
         }
     }
@@ -58,6 +66,10 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener, LoadingCallback 
     }
 
     override fun isOnLoadingState(status: Boolean) {
-        viewModel.setOnLoadingStates(status)
+        viewModel.setLoadingStates(status)
+    }
+
+    override fun isConnectionSuccesfull(status: ConnectionStatus) {
+        viewModel.setConnectionStates(status)
     }
 }

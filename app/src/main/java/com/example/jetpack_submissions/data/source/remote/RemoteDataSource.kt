@@ -1,7 +1,7 @@
 package com.example.jetpack_submissions.data.source.remote
 
-import androidx.lifecycle.MutableLiveData
 import com.example.jetpack_submissions.BuildConfig
+import com.example.jetpack_submissions.data.ConnectionStatus
 import com.example.jetpack_submissions.data.source.remote.api.ApiConfig
 import com.example.jetpack_submissions.data.source.remote.response.MovieItem
 import com.example.jetpack_submissions.data.source.remote.response.MovieResponse
@@ -12,8 +12,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RemoteDataSource private constructor(private val callback: LoadingCallback) {
-
-    val isMovieHomeOnLoad = MutableLiveData<Boolean>()
 
     companion object {
 
@@ -30,30 +28,42 @@ class RemoteDataSource private constructor(private val callback: LoadingCallback
 
     }
 
-    fun getAllRemoteMovies(): MutableLiveData<ArrayList<MovieItem>> {
+    fun getAllRemoteMovies(moviesCallback: LoadMoviesCallback) {
         callback.isOnLoadingState(true)
-        val remoteMovies = MutableLiveData<ArrayList<MovieItem>>()
+        callback.isConnectionSuccesfull(ConnectionStatus(true, ""))
+
         val client =
             ApiConfig.getApiService().getMovies(BuildConfig.API_KEY, LANGUAGE_ENGLISH, PAGE_DEFAULT)
         client.enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 if (response.isSuccessful) {
                     callback.isOnLoadingState(false)
-                    remoteMovies.value = response.body()?.results as ArrayList<MovieItem>
+                    moviesCallback.onAllMoviesReceived(response.body()?.results as ArrayList<MovieItem>)
+                } else {
+                    moviesCallback.onAllMoviesReceived(null)
+                    callback.isOnLoadingState(false)
+                    callback.isConnectionSuccesfull(ConnectionStatus(false, response.message()))
                 }
             }
 
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                moviesCallback.onAllMoviesReceived(null)
+                callback.isOnLoadingState(false)
+                callback.isConnectionSuccesfull(
+                    ConnectionStatus(
+                        false,
+                        "Terjadi masalah dengan jaringan anda"
+                    )
+                )
             }
 
         })
-        return remoteMovies
+
     }
 
-    fun getAllRemoteTVShows(): MutableLiveData<ArrayList<TVShowItem>> {
+    fun getAllRemoteTVShows(tvshowCallback: LoadTVShowCallback) {
         callback.isOnLoadingState(true)
-        val remoteTVShows = MutableLiveData<ArrayList<TVShowItem>>()
+        callback.isConnectionSuccesfull(ConnectionStatus(true, ""))
         val client =
             ApiConfig.getApiService()
                 .getTVShows(BuildConfig.API_KEY, LANGUAGE_ENGLISH, PAGE_DEFAULT)
@@ -64,16 +74,34 @@ class RemoteDataSource private constructor(private val callback: LoadingCallback
             ) {
                 if (response.isSuccessful) {
                     callback.isOnLoadingState(false)
-                    remoteTVShows.value = response.body()?.results as ArrayList<TVShowItem>
+                    tvshowCallback.onAllTVShowsReceived(response.body()?.results as ArrayList<TVShowItem>)
+                } else {
+                    tvshowCallback.onAllTVShowsReceived(null)
+                    callback.isOnLoadingState(false)
+                    callback.isConnectionSuccesfull(ConnectionStatus(false, response.message()))
                 }
             }
 
             override fun onFailure(call: Call<TVShowResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                tvshowCallback.onAllTVShowsReceived(null)
+                callback.isOnLoadingState(false)
+                callback.isConnectionSuccesfull(
+                    ConnectionStatus(
+                        false,
+                        "Terjadi masalah dengan jaringan anda"
+                    )
+                )
             }
 
         })
-        return remoteTVShows
+    }
+
+    interface LoadMoviesCallback {
+        fun onAllMoviesReceived(moviesResponses: ArrayList<MovieItem>?)
+    }
+
+    interface LoadTVShowCallback {
+        fun onAllTVShowsReceived(tvshowResponses: ArrayList<TVShowItem>?)
     }
 
 }
