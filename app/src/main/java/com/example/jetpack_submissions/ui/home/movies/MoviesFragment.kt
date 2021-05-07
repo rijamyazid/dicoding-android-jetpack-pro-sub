@@ -45,6 +45,10 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener, LoadingCallback 
                 setHasFixedSize(true)
                 adapter = moviesAdapter
             }
+
+            viewModel.isLoading.observe(viewLifecycleOwner, {
+                binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+            })
         }
     }
 
@@ -54,6 +58,6 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener, LoadingCallback 
     }
 
     override fun isOnLoadingState(status: Boolean) {
-        binding.progressBar.visibility = if (status) View.VISIBLE else View.GONE
+        viewModel.setOnLoadingStates(status)
     }
 }

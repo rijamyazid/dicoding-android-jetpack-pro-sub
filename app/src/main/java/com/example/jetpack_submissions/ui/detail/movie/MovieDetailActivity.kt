@@ -10,6 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.databinding.ActivityMovieDetailBinding
 import com.example.jetpack_submissions.ui.detail.GenresAdapter
+import com.example.jetpack_submissions.utils.GenreData
 
 class MovieDetailActivity : AppCompatActivity() {
 
@@ -51,7 +52,7 @@ class MovieDetailActivity : AppCompatActivity() {
             with(binding.rvGenres) {
                 layoutManager = GridLayoutManager(context, 3)
                 setHasFixedSize(true)
-                genresAdapter.setGenres(it.genreIds)
+                genresAdapter.setGenres(GenreData.convertMovieGenres(context, it.genreIds))
                 adapter = genresAdapter
             }
         })
