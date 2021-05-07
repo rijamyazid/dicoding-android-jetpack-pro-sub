@@ -12,10 +12,8 @@ class FakeRepository(private val remoteDataSource: RemoteDataSource) : DataSourc
     private val remoteTVShowsResult = MutableLiveData<ArrayList<TVShowItem>>()
 
     private val _isOnloadingStates = MutableLiveData<Boolean>()
-    private val isOnloadingStates: LiveData<Boolean> = _isOnloadingStates
 
     private val _isConnectionSuccessful = MutableLiveData<Boolean>()
-    private val isConnectionSuccessful: LiveData<Boolean> = _isConnectionSuccessful
 
     override fun getAllRemoteMovies(): LiveData<ArrayList<MovieItem>> {
         remoteDataSource.getAllRemoteMovies(object : RemoteDataSource.LoadMoviesCallback {
