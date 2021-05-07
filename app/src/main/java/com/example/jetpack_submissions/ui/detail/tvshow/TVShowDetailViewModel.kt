@@ -7,11 +7,12 @@ import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
 
 class TVShowDetailViewModel : ViewModel() {
 
-    private val _tvshowEntity = MutableLiveData<TVShowItem>()
-    val tvshowEntity: LiveData<TVShowItem> = _tvshowEntity
+    private val _tvshowItem = MutableLiveData<TVShowItem>()
 
-    fun setTVShowEntity(entity: TVShowItem) {
-        _tvshowEntity.value = entity
+    fun getTVShowItem(): LiveData<TVShowItem> = _tvshowItem
+
+    fun setTVShowItem(tvshowItem: TVShowItem) {
+        _tvshowItem.value = tvshowItem
     }
 
 }

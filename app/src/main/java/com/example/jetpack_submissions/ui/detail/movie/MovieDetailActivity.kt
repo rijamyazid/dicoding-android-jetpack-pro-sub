@@ -34,8 +34,8 @@ class MovieDetailActivity : AppCompatActivity() {
         genresAdapter = GenresAdapter()
 
         val movie = args.movieItem
-        viewModel.setMovieEntity(movie)
-        viewModel.movieEntity.observe(this, {
+        viewModel.setMovieItem(movie)
+        viewModel.getMovieItem().observe(this, {
             binding.tvTitleContent.text = it.title
             binding.tvYearContent.text =
                 getString(R.string.release_date, Helpers.inverseDate(it.releaseDate))

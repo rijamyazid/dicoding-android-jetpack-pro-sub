@@ -8,10 +8,11 @@ import com.example.jetpack_submissions.data.source.remote.response.MovieItem
 class MovieDetailViewModel : ViewModel() {
 
     private val _movieEntity = MutableLiveData<MovieItem>()
-    val movieEntity: LiveData<MovieItem> = _movieEntity
 
-    fun setMovieEntity(entity: MovieItem) {
-        _movieEntity.value = entity
+    fun getMovieItem(): LiveData<MovieItem> = _movieEntity
+
+    fun setMovieItem(movieItem: MovieItem) {
+        _movieEntity.value = movieItem
     }
 
 }

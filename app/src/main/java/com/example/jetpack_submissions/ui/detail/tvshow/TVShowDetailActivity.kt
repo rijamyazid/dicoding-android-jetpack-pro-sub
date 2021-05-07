@@ -34,8 +34,8 @@ class TVShowDetailActivity : AppCompatActivity() {
         )[TVShowDetailViewModel::class.java]
 
         val tvshow = args.tvshowItem
-        viewModel.setTVShowEntity(tvshow)
-        viewModel.tvshowEntity.observe(this, {
+        viewModel.setTVShowItem(tvshow)
+        viewModel.getTVShowItem().observe(this, {
             binding.tvTitleContent.text = it.name
             binding.tvYearContent.text = getString(
                 R.string.release_date,
