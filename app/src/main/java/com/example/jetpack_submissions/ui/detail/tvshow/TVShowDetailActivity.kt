@@ -11,6 +11,7 @@ import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.databinding.ActivityTvshowDetailBinding
 import com.example.jetpack_submissions.ui.detail.GenresAdapter
 import com.example.jetpack_submissions.utils.GenreData
+import com.example.jetpack_submissions.utils.Helpers
 
 class TVShowDetailActivity : AppCompatActivity() {
 
@@ -36,9 +37,14 @@ class TVShowDetailActivity : AppCompatActivity() {
         viewModel.setTVShowEntity(tvshow)
         viewModel.tvshowEntity.observe(this, {
             binding.tvTitleContent.text = it.name
-            binding.tvYearContent.text = getString(R.string.release_year_style2, it.firstAirDate)
-            binding.tvCountryContent.text = it.originalLanguage
-            binding.tvDirectorContent.text = it.popularity.toString()
+            binding.tvYearContent.text = getString(
+                R.string.release_date,
+                Helpers.inverseDate(it.firstAirDate)
+            )
+            binding.tvPopularityContent.text = it.popularity.toString()
+            binding.tvVoteContent.text =
+                getString(R.string.vote_average_2, it.voteAverage.toString())
+            binding.tvVoteCountContent.text = it.voteCount.toString()
             binding.tvDetailDescription.text = it.overview
 
             Glide.with(this)

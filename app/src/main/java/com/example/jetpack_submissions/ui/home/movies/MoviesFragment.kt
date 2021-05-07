@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.data.source.remote.response.MovieItem
 import com.example.jetpack_submissions.databinding.FragmentMoviesBinding
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
@@ -54,7 +55,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener {
                 if (!it) {
                     Snackbar.make(
                         requireView(),
-                        "Koneksi bermaslah, menggunakan data cache untuk sementara jika tersedia",
+                        getString(R.string.connection_fail),
                         Snackbar.LENGTH_LONG
                     ).show()
                 }

@@ -9,6 +9,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.data.source.remote.response.MovieItem
 import com.example.jetpack_submissions.databinding.ItemsMoviesBinding
+import com.example.jetpack_submissions.utils.Helpers
 
 class MoviesAdapter(private val context: Context?, private val listener: MovieListener): RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
@@ -26,8 +27,8 @@ class MoviesAdapter(private val context: Context?, private val listener: MovieLi
             with(binding) {
                 tvItemTitle.text = context?.getString(
                     R.string.titleAndRelease,
-                    movie.originalTitle,
-                    movie.releaseDate
+                    movie.title,
+                    Helpers.getYearFromDate(movie.releaseDate)
                 )
                 tvItemDesc.text = movie.overview
                 Glide.with(itemView.context)

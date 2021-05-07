@@ -97,11 +97,11 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/tv_director"
+                            android:id="@+id/tv_popularity"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="@string/director"
+                            android:text="@string/popularity"
                             android:textColor="?attr/colorPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold"
@@ -111,7 +111,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/tv_director_content"
+                            android:id="@+id/tv_popularity_content"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -120,8 +120,8 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tv_director"
-                            tools:text="Robert Rodriguez" />
+                            app:layout_constraintTop_toBottomOf="@id/tv_popularity"
+                            tools:text="2049.6" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View
@@ -135,11 +135,11 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/tv_country"
+                            android:id="@+id/tv_vote"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="@string/country"
+                            android:text="@string/vote_average"
                             android:textColor="?attr/colorPrimary"
                             android:textSize="16sp"
                             android:textStyle="bold"
@@ -149,7 +149,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/tv_country_content"
+                            android:id="@+id/tv_vote_content"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -158,12 +158,51 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tv_country"
-                            tools:text="United States" />
+                            app:layout_constraintTop_toBottomOf="@id/tv_vote"
+                            tools:text="6.9/10" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="?attr/colorPrimary" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/tv_vote_count"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/vote_count"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_vote_count_content"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:gravity="center"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_vote_count"
+                            tools:text="2000" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
 
                 <TextView

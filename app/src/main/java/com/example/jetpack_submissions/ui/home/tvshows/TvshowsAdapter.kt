@@ -9,6 +9,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
 import com.example.jetpack_submissions.databinding.ItemsMoviesBinding
+import com.example.jetpack_submissions.utils.Helpers
 
 class TvshowsAdapter(val context: Context?, val listener: TVShowListener) :
     RecyclerView.Adapter<TvshowsAdapter.TVshowsViewHolder>() {
@@ -26,7 +27,11 @@ class TvshowsAdapter(val context: Context?, val listener: TVShowListener) :
         fun bind(tvShow: TVShowItem) {
             with(binding) {
                 tvItemTitle.text =
-                    context?.getString(R.string.titleAndRelease, tvShow.name, tvShow.firstAirDate)
+                    context?.getString(
+                        R.string.titleAndRelease,
+                        tvShow.name,
+                        Helpers.getYearFromDate(tvShow.firstAirDate)
+                    )
                 tvItemDesc.text = tvShow.overview
                 Glide.with(itemView.context)
                     .load("https://image.tmdb.org/t/p/w500" + tvShow.posterPath)

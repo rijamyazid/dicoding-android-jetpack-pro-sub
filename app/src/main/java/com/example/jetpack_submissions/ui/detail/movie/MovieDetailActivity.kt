@@ -11,6 +11,7 @@ import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.databinding.ActivityMovieDetailBinding
 import com.example.jetpack_submissions.ui.detail.GenresAdapter
 import com.example.jetpack_submissions.utils.GenreData
+import com.example.jetpack_submissions.utils.Helpers
 
 class MovieDetailActivity : AppCompatActivity() {
 
@@ -35,10 +36,13 @@ class MovieDetailActivity : AppCompatActivity() {
         val movie = args.movieItem
         viewModel.setMovieEntity(movie)
         viewModel.movieEntity.observe(this, {
-            binding.tvTitleContent.text = it.originalTitle
-            binding.tvYearContent.text = getString(R.string.release_year_style2, it.releaseDate)
-            binding.tvCountryContent.text = it.originalLanguage
-            binding.tvDirectorContent.text = it.popularity.toString()
+            binding.tvTitleContent.text = it.title
+            binding.tvYearContent.text =
+                getString(R.string.release_date, Helpers.inverseDate(it.releaseDate))
+            binding.tvPopularityContent.text = it.popularity.toString()
+            binding.tvVoteCountContent.text = it.voteCount.toString()
+            binding.tvVoteContent.text =
+                getString(R.string.vote_average_2, it.voteAverage.toString())
             binding.tvDetailDescription.text = it.overview
 
             Glide.with(this)

@@ -8,12 +8,17 @@
     <string name="tvshows">TV Shows</string>
     <string name="title">Title</string>
     <string name="release_year">Release Year</string>
-    <string name="release_year_style2">Release Year: %1$s</string>
+    <string name="release_date">Release date: %1$s</string>
     <string name="titleAndRelease">%1$s (%2$s)</string>
     <string name="country">Country</string>
     <string name="director">Director</string>
     <string name="description">Description</string>
     <string name="description_example">Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm\'s half-human, half-Atlantean brother and true heir to the throne.</string>
     <string name="genres">Genres</string>
+    <string name="connection_fail">Gagal mendapatkan data dari internet, menggunakan data cache jika tersedia</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="popularity">Popularity</string>
+    <string name="vote_average">Vote Average</string>
+    <string name="vote_average_2">%s/10</string>
+    <string name="vote_count">Vote Count</string>
 </resources>
