@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/img_detail_poster"
+                    android:id="@+id/img_detail_poster2"
                     android:layout_width="match_parent"
                     android:layout_height="500dp"
                     android:layout_marginTop="16dp"
@@ -41,6 +41,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -53,7 +54,7 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/tv_title_content"
+                android:id="@+id/tv_title_content2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
@@ -66,14 +67,14 @@
                 tools:text="Alita: Battle Angel" />
 
             <TextView
-                android:id="@+id/tv_year_content"
+                android:id="@+id/tv_year_content2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_content2"
                 tools:text="Release Year: 2019" />
 
             <LinearLayout
@@ -90,7 +91,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_year_content">
+                app:layout_constraintTop_toBottomOf="@+id/tv_year_content2">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -113,7 +114,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tv_popularity_content"
+                        android:id="@+id/tv_popularity_content2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -151,7 +152,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tv_vote_content"
+                        android:id="@+id/tv_vote_content2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -162,46 +163,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_vote"
                         tools:text="6.9/10" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="?attr/colorPrimary" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/tv_vote_count"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/vote_count"
-                        android:textColor="?attr/colorPrimary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tv_vote_count_content"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:gravity="center"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_vote_count"
-                        tools:text="2000" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -224,7 +185,7 @@
                 app:layout_constraintTop_toBottomOf="@id/ll_detail_one_holder" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_genres"
+                android:id="@+id/rv_genres2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
@@ -247,10 +208,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_genres" />
+                app:layout_constraintTop_toBottomOf="@id/rv_genres2" />
 
             <TextView
-                android:id="@+id/tv_detail_description"
+                android:id="@+id/tv_detail_description2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"

@@ -36,16 +36,15 @@ class TVShowDetailActivity : AppCompatActivity() {
         val tvshow = args.tvshowItem
         viewModel.setTVShowItem(tvshow)
         viewModel.getTVShowItem().observe(this, {
-            binding.tvTitleContent.text = it.name
-            binding.tvYearContent.text = getString(
+            binding.tvTitleContent2.text = it.name
+            binding.tvYearContent2.text = getString(
                 R.string.release_date,
                 Helpers.inverseDate(it.firstAirDate)
             )
-            binding.tvPopularityContent.text = it.popularity.toString()
-            binding.tvVoteContent.text =
+            binding.tvPopularityContent2.text = it.popularity.toString()
+            binding.tvVoteContent2.text =
                 getString(R.string.vote_average_2, it.voteAverage.toString())
-            binding.tvVoteCountContent.text = it.voteCount.toString()
-            binding.tvDetailDescription.text = it.overview
+            binding.tvDetailDescription2.text = it.overview
 
             Glide.with(this)
                 .load("https://image.tmdb.org/t/p/w500" + it.posterPath)
@@ -53,9 +52,9 @@ class TVShowDetailActivity : AppCompatActivity() {
                     RequestOptions.placeholderOf(R.drawable.ic_loading)
                         .error(R.drawable.ic_error)
                 )
-                .into(binding.imgDetailPoster)
+                .into(binding.imgDetailPoster2)
 
-            with(binding.rvGenres) {
+            with(binding.rvGenres2) {
                 layoutManager = GridLayoutManager(context, 3)
                 setHasFixedSize(true)
                 genresAdapter.setGenres(GenreData.convertTVShowGenres(context, it.genreIds))

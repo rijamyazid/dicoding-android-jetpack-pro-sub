@@ -40,7 +40,6 @@ class MovieDetailActivity : AppCompatActivity() {
             binding.tvYearContent.text =
                 getString(R.string.release_date, Helpers.inverseDate(it.releaseDate))
             binding.tvPopularityContent.text = it.popularity.toString()
-            binding.tvVoteCountContent.text = it.voteCount.toString()
             binding.tvVoteContent.text =
                 getString(R.string.vote_average_2, it.voteAverage.toString())
             binding.tvDetailDescription.text = it.overview
