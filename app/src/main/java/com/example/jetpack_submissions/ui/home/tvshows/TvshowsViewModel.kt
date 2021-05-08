@@ -7,8 +7,4 @@ class TvshowsViewModel(private val repository: Repository) : ViewModel() {
 
     fun getDataTvshows() = repository.getAllRemoteTVShows()
 
-    fun getLoadingStates() = repository.isOnloadingStates
-
-    fun getConnectionStates() = repository.isConnectionSuccessful
-
 }

@@ -7,8 +7,4 @@ class MoviesViewModel(private val repository: Repository) : ViewModel() {
 
     fun getAllRemoteMovies() = repository.getAllRemoteMovies()
 
-    fun getLoadingStates() = repository.isOnloadingStates
-
-    fun getConnectionStates() = repository.isConnectionSuccessful
-
 }

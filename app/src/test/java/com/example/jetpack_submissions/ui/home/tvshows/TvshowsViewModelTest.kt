@@ -31,9 +31,6 @@ class TvshowsViewModelTest {
     @Mock
     private lateinit var observer1: Observer<ArrayList<TVShowItem>>
 
-    @Mock
-    private lateinit var observer2: Observer<Boolean>
-
     @Before
     fun setUp() {
         viewModel = TvshowsViewModel(repository)
@@ -55,40 +52,6 @@ class TvshowsViewModelTest {
 
         viewModel.getDataTvshows().observeForever(observer1)
         verify(observer1).onChanged(dummyTVShows)
-    }
-
-    @Test
-    fun getLoadingStates() {
-        val onLoad = true
-        val onLoadLiveData = MutableLiveData<Boolean>()
-        onLoadLiveData.value = onLoad
-
-        `when`(repository.isOnloadingStates).thenReturn(onLoadLiveData)
-        val loadStates = viewModel.getLoadingStates().value
-        verify(repository).isOnloadingStates
-
-        assertNotNull(loadStates)
-        assertEquals(onLoad, loadStates)
-
-        viewModel.getLoadingStates().observeForever(observer2)
-        verify(observer2).onChanged(onLoad)
-    }
-
-    @Test
-    fun getConnectionStates() {
-        val connectionSuccess = true
-        val connectionSuccessLiveData = MutableLiveData<Boolean>()
-        connectionSuccessLiveData.value = connectionSuccess
-
-        `when`(repository.isConnectionSuccessful).thenReturn(connectionSuccessLiveData)
-        val connectionStates = viewModel.getConnectionStates().value
-        verify(repository).isConnectionSuccessful
-
-        assertNotNull(connectionStates)
-        assertEquals(connectionSuccess, connectionStates)
-
-        viewModel.getConnectionStates().observeForever(observer2)
-        verify(observer2).onChanged(connectionSuccess)
     }
 
 }

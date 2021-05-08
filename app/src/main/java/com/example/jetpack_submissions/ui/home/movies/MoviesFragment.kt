@@ -8,12 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.jetpack_submissions.R
 import com.example.jetpack_submissions.data.source.remote.response.MovieItem
 import com.example.jetpack_submissions.databinding.FragmentMoviesBinding
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
 import com.example.jetpack_submissions.viewmodel.ViewModelFactory
-import com.google.android.material.snackbar.Snackbar
 
 class MoviesFragment : Fragment(), MoviesAdapter.MovieListener {
 
@@ -31,7 +29,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance()
+            val factory = ViewModelFactory.getInstance(requireActivity())
             viewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
 
             val moviesAdapter = MoviesAdapter(context, this)
@@ -46,20 +44,6 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener {
                 setHasFixedSize(true)
                 adapter = moviesAdapter
             }
-
-            viewModel.getLoadingStates().observe(viewLifecycleOwner, {
-                binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
-            })
-
-            viewModel.getConnectionStates().observe(viewLifecycleOwner, {
-                if (!it) {
-                    Snackbar.make(
-                        requireView(),
-                        getString(R.string.connection_fail),
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                }
-            })
         }
     }
 

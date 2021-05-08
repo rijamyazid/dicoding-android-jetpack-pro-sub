@@ -32,7 +32,7 @@ object GenreData {
         val genresMap = mutableMapOf<Int, String>()
         try {
             val objectResponse =
-                JSONObject(JsonHelper.parsingFileToString(context, "MovieGenres.json").toString())
+                JSONObject(JsonHelper(context).parsingFileToString("MovieGenres.json").toString())
             val genres = objectResponse.getJSONArray("genres")
             for (i in 0 until genres.length()) {
                 val genre = genres.getJSONObject(i)
@@ -51,7 +51,7 @@ object GenreData {
         val genresMap = mutableMapOf<Int, String>()
         try {
             val objectResponse =
-                JSONObject(JsonHelper.parsingFileToString(context, "TVShowGenres.json").toString())
+                JSONObject(JsonHelper(context).parsingFileToString("TVShowGenres.json").toString())
             val genres = objectResponse.getJSONArray("genres")
             for (i in 0 until genres.length()) {
                 val genre = genres.getJSONObject(i)

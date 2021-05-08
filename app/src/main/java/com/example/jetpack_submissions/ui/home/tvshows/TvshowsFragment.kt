@@ -12,7 +12,6 @@ import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
 import com.example.jetpack_submissions.databinding.FragmentTvshowsBinding
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
 import com.example.jetpack_submissions.viewmodel.ViewModelFactory
-import com.google.android.material.snackbar.Snackbar
 
 class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener {
 
@@ -30,7 +29,7 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance()
+            val factory = ViewModelFactory.getInstance(requireActivity())
             viewModel = ViewModelProvider(this, factory)[TvshowsViewModel::class.java]
 
             val tvShowsAdapter = TvshowsAdapter(context, this)
@@ -44,20 +43,6 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener {
                 setHasFixedSize(true)
                 adapter = tvShowsAdapter
             }
-
-            viewModel.getLoadingStates().observe(viewLifecycleOwner, {
-                binding.progressBar2.visibility = if (it) View.VISIBLE else View.GONE
-            })
-
-            viewModel.getConnectionStates().observe(viewLifecycleOwner, {
-                if (!it) {
-                    Snackbar.make(
-                        requireView(),
-                        "Koneksi bermaslah, menggunakan data cache untuk sementara jika tersedia",
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                }
-            })
 
         }
     }
