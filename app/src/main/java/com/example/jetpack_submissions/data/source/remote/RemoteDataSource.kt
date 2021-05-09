@@ -3,20 +3,11 @@ package com.example.jetpack_submissions.data.source.remote
 import com.example.jetpack_submissions.data.source.remote.response.MovieItem
 import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
 import com.example.jetpack_submissions.utils.JsonHelper
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
-
-    companion object {
-
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-        fun getInstance(jsonHelper: JsonHelper): RemoteDataSource =
-            instance ?: synchronized(this) {
-                instance ?: RemoteDataSource(jsonHelper).apply { instance = this }
-            }
-
-    }
+@Singleton
+class RemoteDataSource @Inject constructor(private val jsonHelper: JsonHelper) {
 
     fun getAllRemoteMovies(moviesCallback: LoadMoviesCallback) {
         moviesCallback.onAllMoviesReceived(jsonHelper.loadRemoteMovies())

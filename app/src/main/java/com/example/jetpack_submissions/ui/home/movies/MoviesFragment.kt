@@ -5,18 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jetpack_submissions.data.source.remote.response.MovieItem
 import com.example.jetpack_submissions.databinding.FragmentMoviesBinding
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
-import com.example.jetpack_submissions.viewmodel.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MoviesFragment : Fragment(), MoviesAdapter.MovieListener {
 
-    lateinit var viewModel: MoviesViewModel
-    lateinit var binding: FragmentMoviesBinding
+    private val viewModel: MoviesViewModel by viewModels()
+    private lateinit var binding: FragmentMoviesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,9 +30,6 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            viewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
-
             val moviesAdapter = MoviesAdapter(context, this)
 
             viewModel.getAllRemoteMovies().observe(viewLifecycleOwner, {

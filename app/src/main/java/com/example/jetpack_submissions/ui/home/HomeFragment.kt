@@ -7,13 +7,18 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.jetpack_submissions.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentHomeBinding
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -23,7 +28,8 @@ class HomeFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.show()
 
-        val homePagerAdapter = HomePagerAdapter(view.context, requireActivity().supportFragmentManager)
+        val homePagerAdapter =
+            HomePagerAdapter(view.context, requireActivity().supportFragmentManager)
         binding.viewPager.adapter = homePagerAdapter
         binding.tabs.setupWithViewPager(binding.viewPager)
 

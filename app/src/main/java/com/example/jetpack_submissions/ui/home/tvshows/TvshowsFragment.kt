@@ -5,18 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
 import com.example.jetpack_submissions.databinding.FragmentTvshowsBinding
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
-import com.example.jetpack_submissions.viewmodel.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener {
 
-    lateinit var binding: FragmentTvshowsBinding
-    lateinit var viewModel: TvshowsViewModel
+    private lateinit var binding: FragmentTvshowsBinding
+    private val viewModel: TvshowsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +30,6 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            viewModel = ViewModelProvider(this, factory)[TvshowsViewModel::class.java]
 
             val tvShowsAdapter = TvshowsAdapter(context, this)
             viewModel.getDataTvshows().observe(viewLifecycleOwner, {
