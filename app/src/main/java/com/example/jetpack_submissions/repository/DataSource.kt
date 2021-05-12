@@ -1,4 +1,4 @@
-package com.example.jetpack_submissions.data.source
+package com.example.jetpack_submissions.repository
 
 import androidx.lifecycle.LiveData
 import com.example.jetpack_submissions.data.source.remote.response.MovieItem

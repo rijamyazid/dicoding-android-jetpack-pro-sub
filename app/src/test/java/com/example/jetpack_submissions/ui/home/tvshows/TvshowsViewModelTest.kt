@@ -3,8 +3,8 @@ package com.example.jetpack_submissions.ui.home.tvshows
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.example.jetpack_submissions.data.source.Repository
 import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
+import com.example.jetpack_submissions.repository.Repository
 import com.example.jetpack_submissions.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals

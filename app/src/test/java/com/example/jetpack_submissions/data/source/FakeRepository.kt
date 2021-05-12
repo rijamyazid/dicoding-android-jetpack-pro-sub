@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.jetpack_submissions.data.source.remote.RemoteDataSource
 import com.example.jetpack_submissions.data.source.remote.response.MovieItem
 import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
+import com.example.jetpack_submissions.repository.DataSource
 
 class FakeRepository(private val remoteDataSource: RemoteDataSource) : DataSource {
 

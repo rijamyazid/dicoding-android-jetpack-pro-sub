@@ -1,8 +1,8 @@
 package com.example.jetpack_submissions.di
 
 import android.content.Context
-import com.example.jetpack_submissions.data.source.Repository
 import com.example.jetpack_submissions.data.source.remote.RemoteDataSource
+import com.example.jetpack_submissions.repository.Repository
 import com.example.jetpack_submissions.utils.JsonHelper
 import dagger.Module
 import dagger.Provides
