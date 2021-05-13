@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.jetpack_submissions.data.source.remote.response.MovieItem
+import com.example.jetpack_submissions.data.source.local.entity.MovieEntity
 import com.example.jetpack_submissions.databinding.FragmentMoviesBinding
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,7 +45,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener {
         }
     }
 
-    override fun movieOnClick(entity: MovieItem) {
+    override fun movieOnClick(entity: MovieEntity) {
         val action = HomeFragmentDirections.actionHomeFragmentToDetailActivity(entity)
         findNavController().navigate(action)
     }

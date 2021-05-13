@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
+import com.example.jetpack_submissions.data.source.local.entity.TVShowEntity
 import com.example.jetpack_submissions.databinding.FragmentTvshowsBinding
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,9 +46,10 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener {
         }
     }
 
-    override fun tvshowOnClick(tvshow: TVShowItem) {
+    override fun tvshowOnClick(tvshow: TVShowEntity) {
         val action = HomeFragmentDirections.actionHomeFragmentToTVShowDetailActivity(tvshow)
         findNavController().navigate(action)
+
     }
 
 }

@@ -33,7 +33,7 @@ class TVShowDetailActivity : AppCompatActivity() {
             ViewModelProvider.NewInstanceFactory()
         )[TVShowDetailViewModel::class.java]
 
-        val tvshow = args.tvshowItem
+        val tvshow = args.tvshowEntity
         viewModel.setTVShowItem(tvshow)
         viewModel.getTVShowItem().observe(this, {
             binding.tvTitleContent2.text = it.name

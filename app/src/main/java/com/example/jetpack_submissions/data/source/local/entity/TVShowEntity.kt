@@ -1,11 +1,12 @@
 package com.example.jetpack_submissions.data.source.local.entity
 
+import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.TypeConverters
-import com.example.jetpack_submissions.data.source.local.room.ListStringConverters
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "tvshowentity", primaryKeys = ["tvshow_id"])
 data class TVShowEntity(
 
@@ -16,7 +17,6 @@ data class TVShowEntity(
     val firstAirDate: String,
 
     @ColumnInfo(name = "tvshow_genres")
-    @TypeConverters(ListStringConverters::class)
     val genreIds: List<String>,
 
     @NonNull
@@ -27,7 +27,6 @@ data class TVShowEntity(
     val name: String,
 
     @ColumnInfo(name = "tvshow_oriCountry")
-    @TypeConverters(ListStringConverters::class)
     val originCountry: List<String>,
 
     @ColumnInfo(name = "tvshow_oriLang")
@@ -53,4 +52,4 @@ data class TVShowEntity(
 
     @ColumnInfo(name = "tvshow_isBookmarked")
     val bookmark: Boolean = false
-)
+) : Parcelable

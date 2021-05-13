@@ -6,7 +6,7 @@ import org.json.JSONObject
 
 object GenreData {
 
-    fun convertMovieGenres(context: Context, genreIds: List<Int>): List<String> {
+    fun convertMovieGenres(context: Context, genreIds: List<String>): List<String> {
         val genresInString = arrayListOf<String>()
         val movieGenreMap = movieGenres(context)
         for (i in genreIds.indices) {
@@ -17,7 +17,7 @@ object GenreData {
         return genresInString
     }
 
-    fun convertTVShowGenres(context: Context, genreIds: List<Int>): List<String> {
+    fun convertTVShowGenres(context: Context, genreIds: List<String>): List<String> {
         val genresInString = arrayListOf<String>()
         val tvshowGenreMap = tvshowGenres(context)
         for (i in genreIds.indices) {
@@ -28,8 +28,8 @@ object GenreData {
         return genresInString
     }
 
-    private fun movieGenres(context: Context): Map<Int, String> {
-        val genresMap = mutableMapOf<Int, String>()
+    private fun movieGenres(context: Context): Map<String, String> {
+        val genresMap = mutableMapOf<String, String>()
         try {
             val objectResponse =
                 JSONObject(JsonHelper(context).parsingFileToString("MovieGenres.json").toString())
@@ -39,7 +39,7 @@ object GenreData {
 
                 val id = genre.getInt("id")
                 val name = genre.getString("name")
-                genresMap[id] = name
+                genresMap[id.toString()] = name
             }
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -47,8 +47,8 @@ object GenreData {
         return genresMap
     }
 
-    private fun tvshowGenres(context: Context): Map<Int, String> {
-        val genresMap = mutableMapOf<Int, String>()
+    private fun tvshowGenres(context: Context): Map<String, String> {
+        val genresMap = mutableMapOf<String, String>()
         try {
             val objectResponse =
                 JSONObject(JsonHelper(context).parsingFileToString("TVShowGenres.json").toString())
@@ -58,7 +58,7 @@ object GenreData {
 
                 val id = genre.getInt("id")
                 val name = genre.getString("name")
-                genresMap[id] = name
+                genresMap[id.toString()] = name
             }
         } catch (e: JSONException) {
             e.printStackTrace()

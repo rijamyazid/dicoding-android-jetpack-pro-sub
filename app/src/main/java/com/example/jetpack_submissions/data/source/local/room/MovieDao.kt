@@ -1,17 +1,14 @@
 package com.example.jetpack_submissions.data.source.local.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.jetpack_submissions.data.source.local.entity.MovieEntity
 
 @Dao
 interface MovieDao {
 
-    @Insert
-    fun insertMovies(vararg movies: MovieEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertMovies(movies: List<MovieEntity>)
 
     @Update
     fun updateMovie(movie: MovieEntity)

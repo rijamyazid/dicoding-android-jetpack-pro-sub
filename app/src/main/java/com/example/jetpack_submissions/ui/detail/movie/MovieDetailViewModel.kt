@@ -3,15 +3,15 @@ package com.example.jetpack_submissions.ui.detail.movie
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.jetpack_submissions.data.source.remote.response.MovieItem
+import com.example.jetpack_submissions.data.source.local.entity.MovieEntity
 
 class MovieDetailViewModel : ViewModel() {
 
-    private val _movieEntity = MutableLiveData<MovieItem>()
+    private val _movieEntity = MutableLiveData<MovieEntity>()
 
-    fun getMovieItem(): LiveData<MovieItem> = _movieEntity
+    fun getMovieItem(): LiveData<MovieEntity> = _movieEntity
 
-    fun setMovieItem(movieItem: MovieItem) {
+    fun setMovieItem(movieItem: MovieEntity) {
         _movieEntity.value = movieItem
     }
 

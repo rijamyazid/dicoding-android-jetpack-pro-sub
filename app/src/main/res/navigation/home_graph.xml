@@ -23,8 +23,8 @@
         android:label="activity_detail"
         tools:layout="@layout/activity_movie_detail">
         <argument
-            android:name="movieItem"
-            app:argType="com.example.jetpack_submissions.data.source.remote.response.MovieItem" />
+            android:name="movieEntity"
+            app:argType="com.example.jetpack_submissions.data.source.local.entity.MovieEntity" />
     </activity>
     <activity
         android:id="@+id/TVShowDetailActivity"
@@ -32,7 +32,7 @@
         android:label="activity_tvshow_detail"
         tools:layout="@layout/activity_tvshow_detail">
         <argument
-            android:name="tvshowItem"
-            app:argType="com.example.jetpack_submissions.data.source.remote.response.TVShowItem" />
+            android:name="tvshowEntity"
+            app:argType="com.example.jetpack_submissions.data.source.local.entity.TVShowEntity" />
     </activity>
 </navigation>

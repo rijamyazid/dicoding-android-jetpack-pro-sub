@@ -7,16 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.jetpack_submissions.R
-import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
+import com.example.jetpack_submissions.data.source.local.entity.TVShowEntity
 import com.example.jetpack_submissions.databinding.ItemsMoviesBinding
 import com.example.jetpack_submissions.utils.Helpers
 
 class TvshowsAdapter(val context: Context?, val listener: TVShowListener) :
     RecyclerView.Adapter<TvshowsAdapter.TVshowsViewHolder>() {
 
-    private var listTvshows = ArrayList<TVShowItem>()
+    private var listTvshows = ArrayList<TVShowEntity>()
 
-    fun setTvshows(tvShows: ArrayList<TVShowItem>?) {
+    fun setTvshows(tvShows: List<TVShowEntity>?) {
         if (tvShows == null) return
         listTvshows.clear()
         listTvshows.addAll(tvShows)
@@ -24,7 +24,7 @@ class TvshowsAdapter(val context: Context?, val listener: TVShowListener) :
 
     inner class TVshowsViewHolder(private val binding: ItemsMoviesBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(tvShow: TVShowItem) {
+        fun bind(tvShow: TVShowEntity) {
             with(binding) {
                 tvItemTitle.text =
                     context?.getString(
@@ -49,7 +49,7 @@ class TvshowsAdapter(val context: Context?, val listener: TVShowListener) :
     }
 
     interface TVShowListener {
-        fun tvshowOnClick(tvshow: TVShowItem)
+        fun tvshowOnClick(tvshow: TVShowEntity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TVshowsViewHolder {

@@ -3,7 +3,6 @@ package com.example.jetpack_submissions.utils
 import android.content.Context
 import com.example.jetpack_submissions.data.source.remote.response.MovieItem
 import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
-import dagger.hilt.android.qualifiers.ApplicationContext
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
@@ -11,7 +10,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class JsonHelper @Inject constructor(@ApplicationContext private val context: Context) {
+class JsonHelper @Inject constructor(private val context: Context) {
 
     fun parsingFileToString(fileName: String): String? {
         return try {

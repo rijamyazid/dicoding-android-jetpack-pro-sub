@@ -33,7 +33,7 @@ class MovieDetailActivity : AppCompatActivity() {
         )[MovieDetailViewModel::class.java]
         genresAdapter = GenresAdapter()
 
-        val movie = args.movieItem
+        val movie = args.movieEntity
         viewModel.setMovieItem(movie)
         viewModel.getMovieItem().observe(this, {
             binding.tvTitleContent.text = it.title

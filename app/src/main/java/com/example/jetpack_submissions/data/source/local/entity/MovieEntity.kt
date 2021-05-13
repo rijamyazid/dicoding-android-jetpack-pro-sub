@@ -4,8 +4,6 @@ import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.TypeConverters
-import com.example.jetpack_submissions.data.source.local.room.ListStringConverters
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -19,7 +17,6 @@ data class MovieEntity(
     val backdropPath: String,
 
     @ColumnInfo(name = "movie_genres")
-    @TypeConverters(ListStringConverters::class)
     val genreIds: List<String>,
 
     @NonNull

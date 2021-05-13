@@ -1,13 +1,13 @@
 package com.example.jetpack_submissions.repository
 
 import androidx.lifecycle.LiveData
-import com.example.jetpack_submissions.data.source.remote.response.MovieItem
-import com.example.jetpack_submissions.data.source.remote.response.TVShowItem
+import com.example.jetpack_submissions.data.source.local.entity.MovieEntity
+import com.example.jetpack_submissions.data.source.local.entity.TVShowEntity
 
 interface DataSource {
 
-    fun getAllRemoteMovies(): LiveData<ArrayList<MovieItem>>
+    fun getAllRemoteMovies(): LiveData<List<MovieEntity>>
 
-    fun getAllRemoteTVShows(): LiveData<ArrayList<TVShowItem>>
+    fun getAllRemoteTVShows(): LiveData<List<TVShowEntity>>
 
 }

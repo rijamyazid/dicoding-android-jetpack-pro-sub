@@ -1,17 +1,14 @@
 package com.example.jetpack_submissions.data.source.local.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.jetpack_submissions.data.source.local.entity.TVShowEntity
 
 @Dao
 interface TVShowDao {
 
-    @Insert
-    fun insertTVShows(vararg tvshows: TVShowEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertTVShows(tvshows: List<TVShowEntity>)
 
     @Update
     fun updateTVShow(tvshow: TVShowEntity)

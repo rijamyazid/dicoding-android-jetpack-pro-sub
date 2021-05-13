@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.jetpack_submissions.R
-import com.example.jetpack_submissions.data.source.remote.response.MovieItem
+import com.example.jetpack_submissions.data.source.local.entity.MovieEntity
 import com.example.jetpack_submissions.databinding.ItemsMoviesBinding
 import com.example.jetpack_submissions.utils.Helpers
 
 class MoviesAdapter(private val context: Context?, private val listener: MovieListener): RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
-    private var listMovie = ArrayList<MovieItem>()
+    private var listMovie = ArrayList<MovieEntity>()
 
-    fun setMovies(movies: ArrayList<MovieItem>?) {
+    fun setMovies(movies: List<MovieEntity>?) {
         if (movies == null) return
         listMovie.clear()
         listMovie.addAll(movies)
@@ -23,7 +23,7 @@ class MoviesAdapter(private val context: Context?, private val listener: MovieLi
 
     inner class MoviesViewHolder(private val binding: ItemsMoviesBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(movie: MovieItem) {
+        fun bind(movie: MovieEntity) {
             with(binding) {
                 tvItemTitle.text = context?.getString(
                     R.string.titleAndRelease,
@@ -48,7 +48,7 @@ class MoviesAdapter(private val context: Context?, private val listener: MovieLi
     }
 
     interface MovieListener {
-        fun movieOnClick(entity: MovieItem)
+        fun movieOnClick(entity: MovieEntity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
