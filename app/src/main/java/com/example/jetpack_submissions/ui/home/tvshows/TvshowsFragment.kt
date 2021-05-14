@@ -32,15 +32,14 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
 
-            val tvShowsAdapter = TvshowsAdapter(context, this)
+            val tvShowsAdapter = TVShowsPagingDataAdapter(context, this)
             viewModel.tvshows.observe(viewLifecycleOwner, {
                 if (it != null) {
                     when (it.status) {
                         LocalStatus.LOADING -> {
                         }
                         LocalStatus.SUCCESS -> {
-                            tvShowsAdapter.setTvshows(it.data)
-                            tvShowsAdapter.notifyDataSetChanged()
+                            tvShowsAdapter.submitList(it.data)
                         }
                         LocalStatus.ERROR -> {
                         }

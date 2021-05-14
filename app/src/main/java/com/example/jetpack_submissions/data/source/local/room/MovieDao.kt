@@ -1,6 +1,7 @@
 package com.example.jetpack_submissions.data.source.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import com.example.jetpack_submissions.data.source.local.entity.MovieEntity
 
@@ -17,7 +18,7 @@ interface MovieDao {
     fun updateBookmarkStatus(status: Boolean, movieId: String)
 
     @Query("SELECT * FROM movieentity")
-    fun getAllMovies(): LiveData<List<MovieEntity>>
+    fun getAllMovies(): DataSource.Factory<Int, MovieEntity>
 
     @Query("SELECT * FROM movieentity ORDER BY movie_title ASC")
     fun getAllMoviesSortedByName(): LiveData<List<MovieEntity>>

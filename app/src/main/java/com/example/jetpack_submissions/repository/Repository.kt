@@ -1,6 +1,8 @@
 package com.example.jetpack_submissions.repository
 
 import androidx.lifecycle.LiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.example.jetpack_submissions.data.source.local.LocalDataSource
 import com.example.jetpack_submissions.data.source.local.LocalResponses
 import com.example.jetpack_submissions.data.source.local.entity.MovieEntity
@@ -21,13 +23,18 @@ class Repository @Inject constructor(
     private val executors: AppExecutors
 ) : DataSource {
 
-    override fun getAllRemoteMovies(): LiveData<LocalResponses<List<MovieEntity>>> {
-        return object : NetworkBoundResource<List<MovieEntity>, List<MovieItem>>(executors) {
-            override fun loadFromDB(): LiveData<List<MovieEntity>> {
-                return localDataSource.getAllMovies()
+    override fun getAllRemoteMovies(): LiveData<LocalResponses<PagedList<MovieEntity>>> {
+        return object : NetworkBoundResource<PagedList<MovieEntity>, List<MovieItem>>(executors) {
+            override fun loadFromDB(): LiveData<PagedList<MovieEntity>> {
+                val config = PagedList.Config.Builder()
+                    .setEnablePlaceholders(false)
+                    .setInitialLoadSizeHint(4)
+                    .setPageSize(4)
+                    .build()
+                return LivePagedListBuilder(localDataSource.getAllMovies(), config).build()
             }
 
-            override fun shouldFetch(data: List<MovieEntity>?): Boolean {
+            override fun shouldFetch(data: PagedList<MovieEntity>?): Boolean {
                 return data == null || data.isEmpty()
             }
 
@@ -42,13 +49,18 @@ class Repository @Inject constructor(
         }.asLiveData()
     }
 
-    override fun getAllRemoteTVShows(): LiveData<LocalResponses<List<TVShowEntity>>> {
-        return object : NetworkBoundResource<List<TVShowEntity>, List<TVShowItem>>(executors) {
-            override fun loadFromDB(): LiveData<List<TVShowEntity>> {
-                return localDataSource.getAllTVShows()
+    override fun getAllRemoteTVShows(): LiveData<LocalResponses<PagedList<TVShowEntity>>> {
+        return object : NetworkBoundResource<PagedList<TVShowEntity>, List<TVShowItem>>(executors) {
+            override fun loadFromDB(): LiveData<PagedList<TVShowEntity>> {
+                val config = PagedList.Config.Builder()
+                    .setEnablePlaceholders(false)
+                    .setInitialLoadSizeHint(4)
+                    .setPageSize(4)
+                    .build()
+                return LivePagedListBuilder(localDataSource.getAllTVShows(), config).build()
             }
 
-            override fun shouldFetch(data: List<TVShowEntity>?): Boolean {
+            override fun shouldFetch(data: PagedList<TVShowEntity>?): Boolean {
                 return data == null || data.isEmpty()
             }
 

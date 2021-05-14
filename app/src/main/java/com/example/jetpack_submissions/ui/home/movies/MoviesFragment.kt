@@ -31,7 +31,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val moviesAdapter = MoviesAdapter(context, this)
+            val moviesAdapter = MoviesPagingDataAdapter(context, this)
 
             viewModel.movies.observe(viewLifecycleOwner, {
                 if (it != null) {
@@ -39,8 +39,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener {
                         LocalStatus.LOADING -> {
                         }
                         LocalStatus.SUCCESS -> {
-                            moviesAdapter.setMovies(it.data)
-                            moviesAdapter.notifyDataSetChanged()
+                            moviesAdapter.submitList(it.data)
                         }
                         LocalStatus.ERROR -> {
                         }
