@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.jetpack_submissions.data.source.local.LocalStatus
 import com.example.jetpack_submissions.data.source.local.entity.MovieEntity
 import com.example.jetpack_submissions.databinding.FragmentMoviesBinding
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
@@ -32,9 +33,19 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieListener {
         if (activity != null) {
             val moviesAdapter = MoviesAdapter(context, this)
 
-            viewModel.getAllRemoteMovies().observe(viewLifecycleOwner, {
-                moviesAdapter.setMovies(it)
-                moviesAdapter.notifyDataSetChanged()
+            viewModel.movies.observe(viewLifecycleOwner, {
+                if (it != null) {
+                    when (it.status) {
+                        LocalStatus.LOADING -> {
+                        }
+                        LocalStatus.SUCCESS -> {
+                            moviesAdapter.setMovies(it.data)
+                            moviesAdapter.notifyDataSetChanged()
+                        }
+                        LocalStatus.ERROR -> {
+                        }
+                    }
+                }
             })
 
             with(binding.rvMovies) {

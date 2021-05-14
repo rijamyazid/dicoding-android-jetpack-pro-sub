@@ -8,6 +8,7 @@ import com.example.jetpack_submissions.data.source.local.room.MoviesDatabase
 import com.example.jetpack_submissions.data.source.local.room.TVShowDao
 import com.example.jetpack_submissions.data.source.remote.RemoteDataSource
 import com.example.jetpack_submissions.repository.Repository
+import com.example.jetpack_submissions.utils.AppExecutors
 import com.example.jetpack_submissions.utils.JsonHelper
 import dagger.Module
 import dagger.Provides
@@ -18,7 +19,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RemoteDataSourceModule {
+object MainMoviesModule {
 
     @Singleton
     @Provides
@@ -59,11 +60,17 @@ object RemoteDataSourceModule {
     }
 
     @Provides
+    fun provideExecutors(): AppExecutors {
+        return AppExecutors()
+    }
+
+    @Provides
     fun provideRepository(
         remoteDataSource: RemoteDataSource,
-        localDataSource: LocalDataSource
+        localDataSource: LocalDataSource,
+        executors: AppExecutors
     ): Repository {
-        return Repository(localDataSource, remoteDataSource)
+        return Repository(localDataSource, remoteDataSource, executors)
     }
 
 }

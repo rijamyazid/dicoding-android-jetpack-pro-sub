@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.jetpack_submissions.data.source.local.LocalStatus
 import com.example.jetpack_submissions.data.source.local.entity.TVShowEntity
 import com.example.jetpack_submissions.databinding.FragmentTvshowsBinding
 import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
@@ -32,9 +33,19 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener {
         if (activity != null) {
 
             val tvShowsAdapter = TvshowsAdapter(context, this)
-            viewModel.getDataTvshows().observe(viewLifecycleOwner, {
-                tvShowsAdapter.setTvshows(it)
-                tvShowsAdapter.notifyDataSetChanged()
+            viewModel.tvshows.observe(viewLifecycleOwner, {
+                if (it != null) {
+                    when (it.status) {
+                        LocalStatus.LOADING -> {
+                        }
+                        LocalStatus.SUCCESS -> {
+                            tvShowsAdapter.setTvshows(it.data)
+                            tvShowsAdapter.notifyDataSetChanged()
+                        }
+                        LocalStatus.ERROR -> {
+                        }
+                    }
+                }
             })
 
             with(binding.rvTvshows) {
