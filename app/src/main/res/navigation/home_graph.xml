@@ -35,4 +35,16 @@
             android:name="tvshowEntity"
             app:argType="com.example.jetpack_submissions.data.source.local.entity.TVShowEntity" />
     </activity>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.jetpack_submissions.ui.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/action_favoriteFragment_to_detailActivity"
+            app:destination="@id/detailActivity" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_TVShowDetailActivity"
+            app:destination="@id/TVShowDetailActivity" />
+    </fragment>
 </navigation>

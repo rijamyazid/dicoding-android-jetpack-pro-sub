@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.jetpack_submissions.databinding.FragmentHomeBinding
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,11 +29,11 @@ class HomeFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.show()
 
-        val homePagerAdapter =
-            HomePagerAdapter(view.context, requireActivity().supportFragmentManager)
+        val homePagerAdapter = HomePagerAdapter(this)
         binding.viewPager.adapter = homePagerAdapter
-        binding.tabs.setupWithViewPager(binding.viewPager)
-
+        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
+            tab.text = resources.getString(HomePagerAdapter.TAB_TITLES[position])
+        }.attach()
     }
 
 }

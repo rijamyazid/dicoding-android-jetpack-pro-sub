@@ -21,4 +21,7 @@
     <string name="vote_average">Vote Average</string>
     <string name="vote_average_2">%s/10</string>
     <string name="vote_count">Vote Count</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bnv_home">Home</string>
+    <string name="bnv_favorite">Favorite</string>
 </resources>

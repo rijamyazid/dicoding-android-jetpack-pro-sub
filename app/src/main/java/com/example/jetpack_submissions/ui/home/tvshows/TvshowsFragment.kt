@@ -19,6 +19,7 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener {
 
     private lateinit var binding: FragmentTvshowsBinding
     private val viewModel: TvshowsViewModel by viewModels()
+    private lateinit var tvShowsAdapter: TVShowsPagingDataAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,10 +31,11 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (activity != null) {
 
-            val tvShowsAdapter = TVShowsPagingDataAdapter(context, this)
-            viewModel.tvshows.observe(viewLifecycleOwner, {
+        if (activity != null) {
+            tvShowsAdapter = TVShowsPagingDataAdapter(context, this)
+
+            viewModel.getDataTVShows().observe(viewLifecycleOwner, {
                 if (it != null) {
                     when (it.status) {
                         LocalStatus.LOADING -> {
