@@ -1,5 +1,6 @@
 package com.example.jetpack_submissions.data.source.local
 
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import com.example.jetpack_submissions.data.source.local.entity.MovieEntity
 import com.example.jetpack_submissions.data.source.local.entity.TVShowEntity
@@ -14,9 +15,17 @@ class LocalDataSource @Inject constructor(
     private val tvShowDao: TVShowDao
 ) {
 
+    fun getMovieById(id: String): LiveData<MovieEntity> = movieDao.getMovieById(id)
+
+    fun getTVShowById(id: String): LiveData<TVShowEntity> = tvShowDao.getTVShowById(id)
+
     fun getAllMovies(): DataSource.Factory<Int, MovieEntity> = movieDao.getAllMovies()
 
     fun getAllTVShows(): DataSource.Factory<Int, TVShowEntity> = tvShowDao.getAllTVShows()
+
+    fun getAllFavoriteMovies(): LiveData<List<MovieEntity>> = movieDao.getAllFavoriteMovies()
+
+    fun getAllFavoriteTVShows(): LiveData<List<TVShowEntity>> = tvShowDao.getAllFavoriteTVShows()
 
     fun insertMovies(movies: List<MovieEntity>) {
         movieDao.insertMovies(movies)
@@ -24,6 +33,14 @@ class LocalDataSource @Inject constructor(
 
     fun insertTVShows(tvshows: List<TVShowEntity>) {
         tvShowDao.insertTVShows(tvshows)
+    }
+
+    fun setMovieFavoriteStatus(status: Boolean, movieId: String) {
+        movieDao.setMovieFavoriteStatus(status, movieId)
+    }
+
+    fun setTVShowFavoriteStatus(status: Boolean, tvshowId: String) {
+        tvShowDao.setTVShowFavoriteStatus(status, tvshowId)
     }
 
 }

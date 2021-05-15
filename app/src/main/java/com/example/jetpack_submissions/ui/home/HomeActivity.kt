@@ -18,7 +18,6 @@ class HomeActivity : AppCompatActivity() {
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.setTitle(R.string.home)
 
         val navController = findNavController(R.id.navhost_home)
         binding.bnvMain.setupWithNavController(navController)

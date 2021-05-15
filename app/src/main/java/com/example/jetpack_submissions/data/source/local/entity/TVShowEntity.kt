@@ -50,6 +50,6 @@ data class TVShowEntity(
     @ColumnInfo(name = "tvshow_vCount")
     val voteCount: String,
 
-    @ColumnInfo(name = "tvshow_isBookmarked")
-    val bookmark: Boolean = false
+    @ColumnInfo(name = "tvshow_isFavorite")
+    val favorite: Boolean = false
 ) : Parcelable

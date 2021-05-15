@@ -14,11 +14,17 @@ interface MovieDao {
     @Update
     fun updateMovie(movie: MovieEntity)
 
-    @Query("UPDATE movieentity SET movie_isBookmarked = :status WHERE movie_id = :movieId")
-    fun updateBookmarkStatus(status: Boolean, movieId: String)
+    @Query("UPDATE movieentity SET movie_isFavorite = :status WHERE movie_id = :movieId")
+    fun setMovieFavoriteStatus(status: Boolean, movieId: String)
 
     @Query("SELECT * FROM movieentity")
     fun getAllMovies(): DataSource.Factory<Int, MovieEntity>
+
+    @Query("SELECT * FROM movieentity WHERE movie_id=:movieId")
+    fun getMovieById(movieId: String): LiveData<MovieEntity>
+
+    @Query("SELECT * FROM movieentity WHERE movie_isFavorite = 1")
+    fun getAllFavoriteMovies(): LiveData<List<MovieEntity>>
 
     @Query("SELECT * FROM movieentity ORDER BY movie_title ASC")
     fun getAllMoviesSortedByName(): LiveData<List<MovieEntity>>

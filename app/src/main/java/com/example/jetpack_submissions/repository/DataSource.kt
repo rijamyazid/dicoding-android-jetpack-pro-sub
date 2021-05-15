@@ -8,8 +8,20 @@ import com.example.jetpack_submissions.data.source.local.entity.TVShowEntity
 
 interface DataSource {
 
+    fun getMovieById(id: String): LiveData<MovieEntity>
+
+    fun getTVShowById(id: String): LiveData<TVShowEntity>
+
     fun getAllRemoteMovies(): LiveData<LocalResponses<PagedList<MovieEntity>>>
 
     fun getAllRemoteTVShows(): LiveData<LocalResponses<PagedList<TVShowEntity>>>
+
+    fun getAllFavoriteMovies(): LiveData<List<MovieEntity>>
+
+    fun getAllFavoriteTVShows(): LiveData<List<TVShowEntity>>
+
+    fun setMovieFavoriteStatus(status: Boolean, movieId: String)
+
+    fun setTVShowFavoriteStatus(status: Boolean, tvshowId: String)
 
 }

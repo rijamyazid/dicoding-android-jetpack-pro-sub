@@ -15,7 +15,7 @@ import com.example.jetpack_submissions.utils.Helpers
 
 class MoviesPagingDataAdapter(
     private val context: Context?,
-    private val listener: MoviesAdapter.MovieListener
+    private val listener: MoviesPagingDataAdapter.MovieListener
 ) : PagedListAdapter<MovieEntity, MoviesPagingDataAdapter.MovieViewHolder>(DIFF_CALLBACK) {
 
     companion object {
@@ -74,6 +74,10 @@ class MoviesPagingDataAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding = ItemsMoviesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MovieViewHolder(binding)
+    }
+
+    interface MovieListener {
+        fun movieOnClick(entity: MovieEntity)
     }
 
 }

@@ -1,13 +1,13 @@
-package com.example.jetpack_submissions.ui.home
+package com.example.jetpack_submissions.ui.favorite
 
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.jetpack_submissions.R
-import com.example.jetpack_submissions.ui.home.movies.MoviesFragment
-import com.example.jetpack_submissions.ui.home.tvshows.TvshowsFragment
+import com.example.jetpack_submissions.ui.favorite.movies.MoviesFavoriteFragment
+import com.example.jetpack_submissions.ui.favorite.tvshows.TVShowsFavoriteFragment
 
-class HomePagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class FavoritePagerAdapter(private val fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     companion object {
         @StringRes
@@ -18,8 +18,8 @@ class HomePagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> MoviesFragment()
-            1 -> TvshowsFragment()
+            0 -> MoviesFavoriteFragment()
+            1 -> TVShowsFavoriteFragment()
             else -> Fragment()
         }
     }

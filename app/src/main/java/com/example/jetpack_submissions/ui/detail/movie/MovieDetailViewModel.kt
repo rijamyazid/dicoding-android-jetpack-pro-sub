@@ -2,17 +2,33 @@ package com.example.jetpack_submissions.ui.detail.movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.jetpack_submissions.data.source.local.entity.MovieEntity
+import com.example.jetpack_submissions.repository.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MovieDetailViewModel : ViewModel() {
+@HiltViewModel
+class MovieDetailViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    private val _movieEntity = MutableLiveData<MovieEntity>()
+    private val _movie = MutableLiveData<MovieEntity>()
 
-    fun getMovieItem(): LiveData<MovieEntity> = _movieEntity
+    val movieEntity: LiveData<MovieEntity> = Transformations.switchMap(_movie) {
+        repository.getMovieById(it.id)
+    }
 
-    fun setMovieItem(movieItem: MovieEntity) {
-        _movieEntity.value = movieItem
+    fun setMovieEntity(movieItem: MovieEntity) {
+        _movie.value = movieItem
+    }
+
+    fun setMovieFavoriteStatus() {
+        val movie = movieEntity.value
+        if (movie != null) {
+            val movieStatus = movie.favorite
+            val movieId = movie.id
+            repository.setMovieFavoriteStatus(!movieStatus, movieId)
+        }
     }
 
 }

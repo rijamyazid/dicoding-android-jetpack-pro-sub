@@ -1,4 +1,4 @@
-package com.example.jetpack_submissions.ui.home.tvshows
+package com.example.jetpack_submissions.ui.favorite.tvshows
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ import com.example.jetpack_submissions.data.source.local.entity.TVShowEntity
 import com.example.jetpack_submissions.databinding.ItemsMoviesBinding
 import com.example.jetpack_submissions.utils.Helpers
 
-class TvshowsAdapter(val context: Context?, val listener: TVShowListener) :
-    RecyclerView.Adapter<TvshowsAdapter.TVshowsViewHolder>() {
+class TVShowsAdapter(val context: Context?, val listener: TVShowListener) :
+    RecyclerView.Adapter<TVShowsAdapter.TVshowsViewHolder>() {
 
     private var listTvshows = ArrayList<TVShowEntity>()
 

@@ -23,6 +23,14 @@ class Repository @Inject constructor(
     private val executors: AppExecutors
 ) : DataSource {
 
+    override fun getMovieById(id: String): LiveData<MovieEntity> {
+        return localDataSource.getMovieById(id)
+    }
+
+    override fun getTVShowById(id: String): LiveData<TVShowEntity> {
+        return localDataSource.getTVShowById(id)
+    }
+
     override fun getAllRemoteMovies(): LiveData<LocalResponses<PagedList<MovieEntity>>> {
         return object : NetworkBoundResource<PagedList<MovieEntity>, List<MovieItem>>(executors) {
             override fun loadFromDB(): LiveData<PagedList<MovieEntity>> {
@@ -73,6 +81,26 @@ class Repository @Inject constructor(
                 localDataSource.insertTVShows(tvshowsConverted)
             }
         }.asLiveData()
+    }
+
+    override fun getAllFavoriteMovies(): LiveData<List<MovieEntity>> {
+        return localDataSource.getAllFavoriteMovies()
+    }
+
+    override fun getAllFavoriteTVShows(): LiveData<List<TVShowEntity>> {
+        return localDataSource.getAllFavoriteTVShows()
+    }
+
+    override fun setMovieFavoriteStatus(status: Boolean, movieId: String) {
+        executors.diskIO().execute {
+            localDataSource.setMovieFavoriteStatus(status, movieId)
+        }
+    }
+
+    override fun setTVShowFavoriteStatus(status: Boolean, tvshowId: String) {
+        executors.diskIO().execute {
+            localDataSource.setTVShowFavoriteStatus(status, tvshowId)
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.jetpack_submissions.ui.home.movies
+package com.example.jetpack_submissions.ui.favorite.movies
 
 import android.content.Context
 import android.view.LayoutInflater

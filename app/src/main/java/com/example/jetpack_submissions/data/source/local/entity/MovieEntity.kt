@@ -53,6 +53,6 @@ data class MovieEntity(
     @ColumnInfo(name = "movie_vCount")
     val voteCount: String,
 
-    @ColumnInfo(name = "movie_isBookmarked")
-    val bookmark: Boolean = false
+    @ColumnInfo(name = "movie_isFavorite")
+    val favorite: Boolean = false
 ):Parcelable

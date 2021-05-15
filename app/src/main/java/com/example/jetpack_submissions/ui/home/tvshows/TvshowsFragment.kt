@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jetpack_submissions.data.source.local.LocalStatus
@@ -15,10 +15,10 @@ import com.example.jetpack_submissions.ui.home.HomeFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener {
+class TvshowsFragment : Fragment(), TVShowsPagingDataAdapter.TVShowListener {
 
     private lateinit var binding: FragmentTvshowsBinding
-    private val viewModel: TvshowsViewModel by viewModels()
+    private val viewModel: TvshowsViewModel by activityViewModels()
     private lateinit var tvShowsAdapter: TVShowsPagingDataAdapter
 
     override fun onCreateView(
@@ -35,7 +35,7 @@ class TvshowsFragment : Fragment(), TvshowsAdapter.TVShowListener {
         if (activity != null) {
             tvShowsAdapter = TVShowsPagingDataAdapter(context, this)
 
-            viewModel.getDataTVShows().observe(viewLifecycleOwner, {
+            viewModel.tvshows.observe(viewLifecycleOwner, {
                 if (it != null) {
                     when (it.status) {
                         LocalStatus.LOADING -> {

@@ -15,7 +15,7 @@ import com.example.jetpack_submissions.utils.Helpers
 
 class TVShowsPagingDataAdapter(
     private val context: Context?,
-    private val listener: TvshowsAdapter.TVShowListener
+    private val listener: TVShowListener
 ) : PagedListAdapter<TVShowEntity, TVShowsPagingDataAdapter.TVShowViewHolder>(DIFF_CALLBACK) {
 
     companion object {
@@ -83,6 +83,10 @@ class TVShowsPagingDataAdapter(
     ): TVShowsPagingDataAdapter.TVShowViewHolder {
         val binding = ItemsMoviesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TVShowViewHolder(binding)
+    }
+
+    interface TVShowListener {
+        fun tvshowOnClick(tvshow: TVShowEntity)
     }
 
 }

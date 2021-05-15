@@ -14,11 +14,17 @@ interface TVShowDao {
     @Update
     fun updateTVShow(tvshow: TVShowEntity)
 
-    @Query("UPDATE tvshowentity SET tvshow_isBookmarked = :status WHERE tvshow_id = :tvshowId")
-    fun updateBookmarkStatus(status: Boolean, tvshowId: String)
+    @Query("UPDATE tvshowentity SET tvshow_isFavorite = :status WHERE tvshow_id = :tvshowId")
+    fun setTVShowFavoriteStatus(status: Boolean, tvshowId: String)
+
+    @Query("SELECT * FROM tvshowentity WHERE tvshow_id=:tvshowId")
+    fun getTVShowById(tvshowId: String): LiveData<TVShowEntity>
 
     @Query("SELECT * FROM tvshowentity")
     fun getAllTVShows(): DataSource.Factory<Int, TVShowEntity>
+
+    @Query("SELECT * FROM tvshowentity WHERE tvshow_isFavorite = 1")
+    fun getAllFavoriteTVShows(): LiveData<List<TVShowEntity>>
 
     @Query("SELECT * FROM tvshowentity ORDER BY tvshow_title ASC")
     fun getAllTVShowsSortedByName(): LiveData<List<TVShowEntity>>
