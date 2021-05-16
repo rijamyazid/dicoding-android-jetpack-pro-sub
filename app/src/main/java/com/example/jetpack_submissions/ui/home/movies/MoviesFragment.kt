@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MoviesFragment : Fragment(), MoviesPagingDataAdapter.MovieListener {
 
     private val viewModel: MoviesViewModel by activityViewModels()
-    private lateinit var binding: FragmentMoviesBinding
+    private var binding: FragmentMoviesBinding? = null
     private lateinit var moviesAdapter: MoviesPagingDataAdapter
 
     override fun onCreateView(
@@ -26,7 +26,7 @@ class MoviesFragment : Fragment(), MoviesPagingDataAdapter.MovieListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMoviesBinding.inflate(layoutInflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,21 +39,24 @@ class MoviesFragment : Fragment(), MoviesPagingDataAdapter.MovieListener {
                 if (it != null) {
                     when (it.status) {
                         LocalStatus.LOADING -> {
+                            binding?.progressBar?.visibility = View.VISIBLE
                         }
                         LocalStatus.SUCCESS -> {
                             moviesAdapter.submitList(it.data)
                             moviesAdapter.notifyDataSetChanged()
+                            binding?.progressBar?.visibility = View.GONE
                         }
                         LocalStatus.ERROR -> {
+                            binding?.progressBar?.visibility = View.GONE
                         }
                     }
                 }
             })
 
-            with(binding.rvMovies) {
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-                adapter = moviesAdapter
+            with(binding?.rvMovies) {
+                this?.layoutManager = LinearLayoutManager(context)
+                this?.setHasFixedSize(true)
+                this?.adapter = moviesAdapter
             }
         }
     }

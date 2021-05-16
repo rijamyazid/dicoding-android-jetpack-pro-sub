@@ -83,12 +83,22 @@ class Repository @Inject constructor(
         }.asLiveData()
     }
 
-    override fun getAllFavoriteMovies(): LiveData<List<MovieEntity>> {
-        return localDataSource.getAllFavoriteMovies()
+    override fun getAllFavoriteMovies(): LiveData<PagedList<MovieEntity>> {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
+            .build()
+        return LivePagedListBuilder(localDataSource.getAllFavoriteMovies(), config).build()
     }
 
-    override fun getAllFavoriteTVShows(): LiveData<List<TVShowEntity>> {
-        return localDataSource.getAllFavoriteTVShows()
+    override fun getAllFavoriteTVShows(): LiveData<PagedList<TVShowEntity>> {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
+            .build()
+        return LivePagedListBuilder(localDataSource.getAllFavoriteTVShows(), config).build()
     }
 
     override fun setMovieFavoriteStatus(status: Boolean, movieId: String) {

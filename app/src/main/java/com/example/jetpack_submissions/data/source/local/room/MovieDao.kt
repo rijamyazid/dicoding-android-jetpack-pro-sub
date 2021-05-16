@@ -24,7 +24,7 @@ interface MovieDao {
     fun getMovieById(movieId: String): LiveData<MovieEntity>
 
     @Query("SELECT * FROM movieentity WHERE movie_isFavorite = 1")
-    fun getAllFavoriteMovies(): LiveData<List<MovieEntity>>
+    fun getAllFavoriteMovies(): DataSource.Factory<Int, MovieEntity>
 
     @Query("SELECT * FROM movieentity ORDER BY movie_title ASC")
     fun getAllMoviesSortedByName(): LiveData<List<MovieEntity>>

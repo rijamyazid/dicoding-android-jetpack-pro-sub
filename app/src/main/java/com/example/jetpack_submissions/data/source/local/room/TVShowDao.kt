@@ -24,7 +24,7 @@ interface TVShowDao {
     fun getAllTVShows(): DataSource.Factory<Int, TVShowEntity>
 
     @Query("SELECT * FROM tvshowentity WHERE tvshow_isFavorite = 1")
-    fun getAllFavoriteTVShows(): LiveData<List<TVShowEntity>>
+    fun getAllFavoriteTVShows(): DataSource.Factory<Int, TVShowEntity>
 
     @Query("SELECT * FROM tvshowentity ORDER BY tvshow_title ASC")
     fun getAllTVShowsSortedByName(): LiveData<List<TVShowEntity>>

@@ -6,6 +6,7 @@ import com.example.jetpack_submissions.data.source.local.LocalResponses
 import com.example.jetpack_submissions.data.source.remote.RemoteResponses
 import com.example.jetpack_submissions.data.source.remote.RemoteStatus
 import com.example.jetpack_submissions.utils.AppExecutors
+import com.example.jetpack_submissions.utils.EspressoIdlingResource
 
 abstract class NetworkBoundResource<LocalData, RemoteData>(private val mExecutors: AppExecutors) {
 
@@ -18,10 +19,12 @@ abstract class NetworkBoundResource<LocalData, RemoteData>(private val mExecutor
         val dbSource = loadFromDB()
 
         result.addSource(dbSource) { data ->
+            EspressoIdlingResource.increment()
             result.removeSource(dbSource)
             if (shouldFetch(data)) {
                 fetchFromNetwork(dbSource)
             } else {
+                EspressoIdlingResource.decrement()
                 result.addSource(dbSource) { newData ->
                     result.value = LocalResponses.success(newData)
                 }
@@ -54,18 +57,21 @@ abstract class NetworkBoundResource<LocalData, RemoteData>(private val mExecutor
                     mExecutors.diskIO().execute {
                         saveCallResult(response.data)
                         mExecutors.mainThread().execute {
+                            EspressoIdlingResource.decrement()
                             result.addSource(loadFromDB()) { newData ->
                                 result.value = LocalResponses.success(newData)
                             }
                         }
                     }
                 RemoteStatus.EMPTY -> mExecutors.mainThread().execute {
+                    EspressoIdlingResource.decrement()
                     result.addSource(loadFromDB()) { newData ->
                         result.value = LocalResponses.success(newData)
                     }
                 }
                 RemoteStatus.ERROR -> {
                     onFetchFailed()
+                    EspressoIdlingResource.decrement()
                     result.addSource(dbSource) { newData ->
                         result.value = LocalResponses.error(response.message, newData)
                     }

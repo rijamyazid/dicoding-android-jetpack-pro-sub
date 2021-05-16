@@ -11,15 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jetpack_submissions.data.source.local.entity.MovieEntity
 import com.example.jetpack_submissions.databinding.FragmentMoviesFavoriteBinding
 import com.example.jetpack_submissions.ui.favorite.FavoriteFragmentDirections
+import com.example.jetpack_submissions.ui.home.movies.MoviesPagingDataAdapter
 import com.example.jetpack_submissions.ui.home.movies.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MoviesFavoriteFragment : Fragment(), MoviesAdapter.MovieListener {
+class MoviesFavoriteFragment : Fragment(), MoviesPagingDataAdapter.MovieListener {
 
     private val viewModel: MoviesViewModel by activityViewModels()
     private var binding: FragmentMoviesFavoriteBinding? = null
-    private lateinit var adapter: MoviesAdapter
+    private lateinit var adapter: MoviesPagingDataAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,10 +34,10 @@ class MoviesFavoriteFragment : Fragment(), MoviesAdapter.MovieListener {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            adapter = MoviesAdapter(context, this)
+            adapter = MoviesPagingDataAdapter(context, this)
 
             viewModel.favoritedMovies.observe(viewLifecycleOwner, {
-                adapter.setMovies(it)
+                adapter.submitList(it)
                 adapter.notifyDataSetChanged()
             })
 

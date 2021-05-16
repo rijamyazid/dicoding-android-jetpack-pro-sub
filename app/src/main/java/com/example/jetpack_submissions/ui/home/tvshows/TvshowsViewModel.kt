@@ -16,14 +16,14 @@ class TvshowsViewModel @Inject constructor(private val repository: Repository) :
     val tvshows: LiveData<LocalResponses<PagedList<TVShowEntity>>> =
         Transformations.switchMap(getDataTVShows()) { getDataTVShows() }
 
-    val favoritedTVShow: LiveData<List<TVShowEntity>> =
+    val favoritedTVShow: LiveData<PagedList<TVShowEntity>> =
         Transformations.switchMap(getDataFavoriteTVShows()) { getDataFavoriteTVShows() }
 
     private fun getDataTVShows(): LiveData<LocalResponses<PagedList<TVShowEntity>>> {
         return repository.getAllRemoteTVShows()
     }
 
-    private fun getDataFavoriteTVShows(): LiveData<List<TVShowEntity>> {
+    private fun getDataFavoriteTVShows(): LiveData<PagedList<TVShowEntity>> {
         return repository.getAllFavoriteTVShows()
     }
 

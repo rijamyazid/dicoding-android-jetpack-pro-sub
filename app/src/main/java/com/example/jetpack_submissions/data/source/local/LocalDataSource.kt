@@ -23,9 +23,11 @@ class LocalDataSource @Inject constructor(
 
     fun getAllTVShows(): DataSource.Factory<Int, TVShowEntity> = tvShowDao.getAllTVShows()
 
-    fun getAllFavoriteMovies(): LiveData<List<MovieEntity>> = movieDao.getAllFavoriteMovies()
+    fun getAllFavoriteMovies(): DataSource.Factory<Int, MovieEntity> =
+        movieDao.getAllFavoriteMovies()
 
-    fun getAllFavoriteTVShows(): LiveData<List<TVShowEntity>> = tvShowDao.getAllFavoriteTVShows()
+    fun getAllFavoriteTVShows(): DataSource.Factory<Int, TVShowEntity> =
+        tvShowDao.getAllFavoriteTVShows()
 
     fun insertMovies(movies: List<MovieEntity>) {
         movieDao.insertMovies(movies)

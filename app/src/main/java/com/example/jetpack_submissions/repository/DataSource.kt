@@ -16,9 +16,9 @@ interface DataSource {
 
     fun getAllRemoteTVShows(): LiveData<LocalResponses<PagedList<TVShowEntity>>>
 
-    fun getAllFavoriteMovies(): LiveData<List<MovieEntity>>
+    fun getAllFavoriteMovies(): LiveData<PagedList<MovieEntity>>
 
-    fun getAllFavoriteTVShows(): LiveData<List<TVShowEntity>>
+    fun getAllFavoriteTVShows(): LiveData<PagedList<TVShowEntity>>
 
     fun setMovieFavoriteStatus(status: Boolean, movieId: String)
 

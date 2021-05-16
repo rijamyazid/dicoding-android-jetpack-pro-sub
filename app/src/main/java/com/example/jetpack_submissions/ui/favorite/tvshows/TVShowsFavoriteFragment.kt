@@ -11,15 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jetpack_submissions.data.source.local.entity.TVShowEntity
 import com.example.jetpack_submissions.databinding.FragmentTvshowsFavoriteBinding
 import com.example.jetpack_submissions.ui.favorite.FavoriteFragmentDirections
+import com.example.jetpack_submissions.ui.home.tvshows.TVShowsPagingDataAdapter
 import com.example.jetpack_submissions.ui.home.tvshows.TvshowsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TVShowsFavoriteFragment : Fragment(), TVShowsAdapter.TVShowListener {
+class TVShowsFavoriteFragment : Fragment(), TVShowsPagingDataAdapter.TVShowListener {
 
     private val viewModel: TvshowsViewModel by activityViewModels()
     private var binding: FragmentTvshowsFavoriteBinding? = null
-    private lateinit var adapter: TVShowsAdapter
+    private lateinit var adapter: TVShowsPagingDataAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,10 +34,10 @@ class TVShowsFavoriteFragment : Fragment(), TVShowsAdapter.TVShowListener {
         super.onViewCreated(view, savedInstanceState)
 
         if (binding != null) {
-            adapter = TVShowsAdapter(context, this)
+            adapter = TVShowsPagingDataAdapter(context, this)
 
             viewModel.favoritedTVShow.observe(viewLifecycleOwner, {
-                adapter.setTvshows(it)
+                adapter.submitList(it)
                 adapter.notifyDataSetChanged()
             })
 

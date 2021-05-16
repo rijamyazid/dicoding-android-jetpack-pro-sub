@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class TvshowsFragment : Fragment(), TVShowsPagingDataAdapter.TVShowListener {
 
-    private lateinit var binding: FragmentTvshowsBinding
+    private var binding: FragmentTvshowsBinding? = null
     private val viewModel: TvshowsViewModel by activityViewModels()
     private lateinit var tvShowsAdapter: TVShowsPagingDataAdapter
 
@@ -26,7 +26,7 @@ class TvshowsFragment : Fragment(), TVShowsPagingDataAdapter.TVShowListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTvshowsBinding.inflate(layoutInflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,20 +39,24 @@ class TvshowsFragment : Fragment(), TVShowsPagingDataAdapter.TVShowListener {
                 if (it != null) {
                     when (it.status) {
                         LocalStatus.LOADING -> {
+                            binding?.progressBar2?.visibility = View.VISIBLE
                         }
                         LocalStatus.SUCCESS -> {
                             tvShowsAdapter.submitList(it.data)
+                            tvShowsAdapter.notifyDataSetChanged()
+                            binding?.progressBar2?.visibility = View.GONE
                         }
                         LocalStatus.ERROR -> {
+                            binding?.progressBar2?.visibility = View.GONE
                         }
                     }
                 }
             })
 
-            with(binding.rvTvshows) {
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-                adapter = tvShowsAdapter
+            with(binding?.rvTvshows) {
+                this?.layoutManager = LinearLayoutManager(context)
+                this?.setHasFixedSize(true)
+                this?.adapter = tvShowsAdapter
             }
 
         }
