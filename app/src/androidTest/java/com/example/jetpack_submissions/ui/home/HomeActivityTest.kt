@@ -140,7 +140,16 @@ class HomeActivityTest {
         )
         onView(withId(R.id.appbar_add_to_favorite)).perform(click())
         onView(isRoot()).perform(ViewActions.pressBack())
-        onView(withId(2131231186)).perform(click())
+
+        onView(
+            allOf(
+                withText("Favorite"),
+                isDescendantOfA(withId(R.id.bnv_main)),
+                isDisplayed()
+            )
+        )
+            .perform(click())
+
         onView(withId(R.id.rv_movies2)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_movies2)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
@@ -172,7 +181,16 @@ class HomeActivityTest {
         )
         onView(withId(R.id.appbar_add_to_favorite)).perform(click())
         onView(isRoot()).perform(ViewActions.pressBack())
-        onView(withId(2131231186)).perform(click())
+
+        onView(
+            allOf(
+                withText("Favorite"),
+                isDescendantOfA(withId(R.id.bnv_main)),
+                isDisplayed()
+            )
+        )
+            .perform(click())
+
         onView(withText("TV Shows")).perform(click())
         onView(withId(R.id.rv_tvshows2)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_tvshows2)).perform(

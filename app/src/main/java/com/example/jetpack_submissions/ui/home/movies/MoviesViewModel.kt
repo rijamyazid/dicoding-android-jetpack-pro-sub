@@ -19,11 +19,11 @@ class MoviesViewModel @Inject constructor(private val repository: Repository) : 
     val favoritedMovies: LiveData<PagedList<MovieEntity>> =
         Transformations.switchMap(getDataFavoriteMovies()) { getDataFavoriteMovies() }
 
-    private fun getDataMovies(): LiveData<LocalResponses<PagedList<MovieEntity>>> {
+    fun getDataMovies(): LiveData<LocalResponses<PagedList<MovieEntity>>> {
         return repository.getAllRemoteMovies()
     }
 
-    private fun getDataFavoriteMovies(): LiveData<PagedList<MovieEntity>> {
+    fun getDataFavoriteMovies(): LiveData<PagedList<MovieEntity>> {
         return repository.getAllFavoriteMovies()
     }
 
